@@ -5,26 +5,29 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	costanomalyalert "github.com/upbound/provider-azure/internal/controller/cluster/costmanagement/costanomalyalert"
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/cluster/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/cluster/costmanagement/subscriptioncostmanagementexport"
 )
 
+var costmanagementCrdGroup = "costmanagement.azure.upbound.io"
+
 // Setup_costmanagement creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_costmanagement(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		costanomalyalert.Setup,
-		resourcegroupcostmanagementexport.Setup,
-		subscriptioncostmanagementexport.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: costmanagementCrdGroup, Kind: "CostAnomalyAlert"}:                  costanomalyalert.Setup,
+		schema.GroupKind{Group: costmanagementCrdGroup, Kind: "ResourceGroupCostManagementExport"}: resourcegroupcostmanagementexport.Setup,
+		schema.GroupKind{Group: costmanagementCrdGroup, Kind: "SubscriptionCostManagementExport"}:  subscriptioncostmanagementexport.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

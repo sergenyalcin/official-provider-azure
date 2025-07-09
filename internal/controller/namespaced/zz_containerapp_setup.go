@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	containerapp "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/containerapp"
 	customdomain "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/customdomain"
@@ -18,21 +20,22 @@ import (
 	environmentstorage "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/environmentstorage"
 )
 
+var containerappCrdGroup = "containerapp.azure.m.upbound.io"
+
 // Setup_containerapp creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_containerapp(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		containerapp.Setup,
-		customdomain.Setup,
-		environment.Setup,
-		environmentcertificate.Setup,
-		environmentcustomdomain.Setup,
-		environmentdaprcomponent.Setup,
-		environmentstorage.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: containerappCrdGroup, Kind: "ContainerApp"}:             containerapp.Setup,
+		schema.GroupKind{Group: containerappCrdGroup, Kind: "CustomDomain"}:             customdomain.Setup,
+		schema.GroupKind{Group: containerappCrdGroup, Kind: "Environment"}:              environment.Setup,
+		schema.GroupKind{Group: containerappCrdGroup, Kind: "EnvironmentCertificate"}:   environmentcertificate.Setup,
+		schema.GroupKind{Group: containerappCrdGroup, Kind: "EnvironmentCustomDomain"}:  environmentcustomdomain.Setup,
+		schema.GroupKind{Group: containerappCrdGroup, Kind: "EnvironmentDaprComponent"}: environmentdaprcomponent.Setup,
+		schema.GroupKind{Group: containerappCrdGroup, Kind: "EnvironmentStorage"}:       environmentstorage.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

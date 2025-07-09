@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	cluster "github.com/upbound/provider-azure/internal/controller/cluster/streamanalytics/cluster"
 	functionjavascriptuda "github.com/upbound/provider-azure/internal/controller/cluster/streamanalytics/functionjavascriptuda"
@@ -29,32 +31,33 @@ import (
 	streaminputiothub "github.com/upbound/provider-azure/internal/controller/cluster/streamanalytics/streaminputiothub"
 )
 
+var streamanalyticsCrdGroup = "streamanalytics.azure.upbound.io"
+
 // Setup_streamanalytics creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_streamanalytics(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		cluster.Setup,
-		functionjavascriptuda.Setup,
-		job.Setup,
-		managedprivateendpoint.Setup,
-		outputblob.Setup,
-		outputeventhub.Setup,
-		outputfunction.Setup,
-		outputmssql.Setup,
-		outputpowerbi.Setup,
-		outputservicebusqueue.Setup,
-		outputservicebustopic.Setup,
-		outputsynapse.Setup,
-		outputtable.Setup,
-		referenceinputblob.Setup,
-		referenceinputmssql.Setup,
-		streaminputblob.Setup,
-		streaminputeventhub.Setup,
-		streaminputiothub.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "Cluster"}:                cluster.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "FunctionJavascriptUda"}:  functionjavascriptuda.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "Job"}:                    job.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "ManagedPrivateEndpoint"}: managedprivateendpoint.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputBlob"}:             outputblob.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputEventHub"}:         outputeventhub.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputFunction"}:         outputfunction.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputMSSQL"}:            outputmssql.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputPowerBI"}:          outputpowerbi.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputServiceBusQueue"}:  outputservicebusqueue.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputServiceBusTopic"}:  outputservicebustopic.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputSynapse"}:          outputsynapse.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "OutputTable"}:            outputtable.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "ReferenceInputBlob"}:     referenceinputblob.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "ReferenceInputMSSQL"}:    referenceinputmssql.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "StreamInputBlob"}:        streaminputblob.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "StreamInputEventHub"}:    streaminputeventhub.Setup,
+		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "StreamInputIOTHub"}:      streaminputiothub.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

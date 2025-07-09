@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	appactiveslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/appactiveslot"
 	apphybridconnection "github.com/upbound/provider-azure/internal/controller/namespaced/web/apphybridconnection"
@@ -30,33 +32,34 @@ import (
 	windowswebappslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/windowswebappslot"
 )
 
+var webCrdGroup = "web.azure.m.upbound.io"
+
 // Setup_web creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_web(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		appactiveslot.Setup,
-		apphybridconnection.Setup,
-		appserviceplan.Setup,
-		functionapp.Setup,
-		functionappactiveslot.Setup,
-		functionappfunction.Setup,
-		functionapphybridconnection.Setup,
-		functionappslot.Setup,
-		linuxfunctionapp.Setup,
-		linuxfunctionappslot.Setup,
-		linuxwebapp.Setup,
-		linuxwebappslot.Setup,
-		serviceplan.Setup,
-		sourcecontroltoken.Setup,
-		staticsite.Setup,
-		windowsfunctionapp.Setup,
-		windowsfunctionappslot.Setup,
-		windowswebapp.Setup,
-		windowswebappslot.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: webCrdGroup, Kind: "AppActiveSlot"}:               appactiveslot.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "AppHybridConnection"}:         apphybridconnection.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "AppServicePlan"}:              appserviceplan.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "FunctionApp"}:                 functionapp.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "FunctionAppActiveSlot"}:       functionappactiveslot.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "FunctionAppFunction"}:         functionappfunction.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "FunctionAppHybridConnection"}: functionapphybridconnection.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "FunctionAppSlot"}:             functionappslot.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "LinuxFunctionApp"}:            linuxfunctionapp.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "LinuxFunctionAppSlot"}:        linuxfunctionappslot.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "LinuxWebApp"}:                 linuxwebapp.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "LinuxWebAppSlot"}:             linuxwebappslot.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "ServicePlan"}:                 serviceplan.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "SourceControlToken"}:          sourcecontroltoken.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "StaticSite"}:                  staticsite.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "WindowsFunctionApp"}:          windowsfunctionapp.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "WindowsFunctionAppSlot"}:      windowsfunctionappslot.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "WindowsWebApp"}:               windowswebapp.Setup,
+		schema.GroupKind{Group: webCrdGroup, Kind: "WindowsWebAppSlot"}:           windowswebappslot.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

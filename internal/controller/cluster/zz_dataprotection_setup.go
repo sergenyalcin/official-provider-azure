@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	backupinstanceblobstorage "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backupinstanceblobstorage"
 	backupinstancedisk "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backupinstancedisk"
@@ -21,24 +23,25 @@ import (
 	resourceguard "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/resourceguard"
 )
 
+var dataprotectionCrdGroup = "dataprotection.azure.upbound.io"
+
 // Setup_dataprotection creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		backupinstanceblobstorage.Setup,
-		backupinstancedisk.Setup,
-		backupinstancekubernetescluster.Setup,
-		backupinstancepostgresql.Setup,
-		backuppolicyblobstorage.Setup,
-		backuppolicydisk.Setup,
-		backuppolicykubernetescluster.Setup,
-		backuppolicypostgresql.Setup,
-		backupvault.Setup,
-		resourceguard.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupInstanceBlobStorage"}:       backupinstanceblobstorage.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupInstanceDisk"}:              backupinstancedisk.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupInstanceKubernetesCluster"}: backupinstancekubernetescluster.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupInstancePostgreSQL"}:        backupinstancepostgresql.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupPolicyBlobStorage"}:         backuppolicyblobstorage.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupPolicyDisk"}:                backuppolicydisk.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupPolicyKubernetesCluster"}:   backuppolicykubernetescluster.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupPolicyPostgreSQL"}:          backuppolicypostgresql.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupVault"}:                     backupvault.Setup,
+		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "ResourceGuard"}:                   resourceguard.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

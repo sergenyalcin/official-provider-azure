@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	iothub "github.com/upbound/provider-azure/internal/controller/cluster/devices/iothub"
 	iothubcertificate "github.com/upbound/provider-azure/internal/controller/cluster/devices/iothubcertificate"
@@ -25,28 +27,29 @@ import (
 	iothubsharedaccesspolicy "github.com/upbound/provider-azure/internal/controller/cluster/devices/iothubsharedaccesspolicy"
 )
 
+var devicesCrdGroup = "devices.azure.upbound.io"
+
 // Setup_devices creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_devices(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		iothub.Setup,
-		iothubcertificate.Setup,
-		iothubconsumergroup.Setup,
-		iothubdps.Setup,
-		iothubdpscertificate.Setup,
-		iothubdpssharedaccesspolicy.Setup,
-		iothubendpointeventhub.Setup,
-		iothubendpointservicebusqueue.Setup,
-		iothubendpointservicebustopic.Setup,
-		iothubendpointstoragecontainer.Setup,
-		iothubenrichment.Setup,
-		iothubfallbackroute.Setup,
-		iothubroute.Setup,
-		iothubsharedaccesspolicy.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHub"}:                         iothub.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubCertificate"}:              iothubcertificate.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubConsumerGroup"}:            iothubconsumergroup.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubDPS"}:                      iothubdps.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubDPSCertificate"}:           iothubdpscertificate.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubDPSSharedAccessPolicy"}:    iothubdpssharedaccesspolicy.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubEndpointEventHub"}:         iothubendpointeventhub.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubEndpointServiceBusQueue"}:  iothubendpointservicebusqueue.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubEndpointServiceBusTopic"}:  iothubendpointservicebustopic.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubEndpointStorageContainer"}: iothubendpointstoragecontainer.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubEnrichment"}:               iothubenrichment.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubFallbackRoute"}:            iothubfallbackroute.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubRoute"}:                    iothubroute.Setup,
+		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubSharedAccessPolicy"}:       iothubsharedaccesspolicy.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

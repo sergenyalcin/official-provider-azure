@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	authorizationrule "github.com/upbound/provider-azure/internal/controller/namespaced/eventhub/authorizationrule"
 	consumergroup "github.com/upbound/provider-azure/internal/controller/namespaced/eventhub/consumergroup"
@@ -18,21 +20,22 @@ import (
 	namespaceschemagroup "github.com/upbound/provider-azure/internal/controller/namespaced/eventhub/namespaceschemagroup"
 )
 
+var eventhubCrdGroup = "eventhub.azure.m.upbound.io"
+
 // Setup_eventhub creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_eventhub(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		authorizationrule.Setup,
-		consumergroup.Setup,
-		eventhub.Setup,
-		eventhubnamespace.Setup,
-		namespaceauthorizationrule.Setup,
-		namespacedisasterrecoveryconfig.Setup,
-		namespaceschemagroup.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: eventhubCrdGroup, Kind: "AuthorizationRule"}:               authorizationrule.Setup,
+		schema.GroupKind{Group: eventhubCrdGroup, Kind: "ConsumerGroup"}:                   consumergroup.Setup,
+		schema.GroupKind{Group: eventhubCrdGroup, Kind: "EventHub"}:                        eventhub.Setup,
+		schema.GroupKind{Group: eventhubCrdGroup, Kind: "EventHubNamespace"}:               eventhubnamespace.Setup,
+		schema.GroupKind{Group: eventhubCrdGroup, Kind: "NamespaceAuthorizationRule"}:      namespaceauthorizationrule.Setup,
+		schema.GroupKind{Group: eventhubCrdGroup, Kind: "NamespaceDisasterRecoveryConfig"}: namespacedisasterrecoveryconfig.Setup,
+		schema.GroupKind{Group: eventhubCrdGroup, Kind: "NamespaceSchemaGroup"}:            namespaceschemagroup.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

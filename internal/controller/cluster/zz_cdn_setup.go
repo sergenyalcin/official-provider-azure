@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	endpoint "github.com/upbound/provider-azure/internal/controller/cluster/cdn/endpoint"
 	frontdoorcustomdomain "github.com/upbound/provider-azure/internal/controller/cluster/cdn/frontdoorcustomdomain"
@@ -24,27 +26,28 @@ import (
 	profile "github.com/upbound/provider-azure/internal/controller/cluster/cdn/profile"
 )
 
+var cdnCrdGroup = "cdn.azure.upbound.io"
+
 // Setup_cdn creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_cdn(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		endpoint.Setup,
-		frontdoorcustomdomain.Setup,
-		frontdoorcustomdomainassociation.Setup,
-		frontdoorendpoint.Setup,
-		frontdoorfirewallpolicy.Setup,
-		frontdoororigin.Setup,
-		frontdoororigingroup.Setup,
-		frontdoorprofile.Setup,
-		frontdoorroute.Setup,
-		frontdoorrule.Setup,
-		frontdoorruleset.Setup,
-		frontdoorsecuritypolicy.Setup,
-		profile.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "Endpoint"}:                         endpoint.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorCustomDomain"}:            frontdoorcustomdomain.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorCustomDomainAssociation"}: frontdoorcustomdomainassociation.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorEndpoint"}:                frontdoorendpoint.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorFirewallPolicy"}:          frontdoorfirewallpolicy.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorOrigin"}:                  frontdoororigin.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorOriginGroup"}:             frontdoororigingroup.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorProfile"}:                 frontdoorprofile.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorRoute"}:                   frontdoorroute.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorRule"}:                    frontdoorrule.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorRuleSet"}:                 frontdoorruleset.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorSecurityPolicy"}:          frontdoorsecuritypolicy.Setup,
+		schema.GroupKind{Group: cdnCrdGroup, Kind: "Profile"}:                          profile.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

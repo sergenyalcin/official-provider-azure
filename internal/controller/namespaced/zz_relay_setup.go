@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	eventrelaynamespace "github.com/upbound/provider-azure/internal/controller/namespaced/relay/eventrelaynamespace"
 	hybridconnection "github.com/upbound/provider-azure/internal/controller/namespaced/relay/hybridconnection"
@@ -15,18 +17,19 @@ import (
 	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/namespaced/relay/namespaceauthorizationrule"
 )
 
+var relayCrdGroup = "relay.azure.m.upbound.io"
+
 // Setup_relay creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_relay(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		eventrelaynamespace.Setup,
-		hybridconnection.Setup,
-		hybridconnectionauthorizationrule.Setup,
-		namespaceauthorizationrule.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: relayCrdGroup, Kind: "EventRelayNamespace"}:               eventrelaynamespace.Setup,
+		schema.GroupKind{Group: relayCrdGroup, Kind: "HybridConnection"}:                  hybridconnection.Setup,
+		schema.GroupKind{Group: relayCrdGroup, Kind: "HybridConnectionAuthorizationRule"}: hybridconnectionauthorizationrule.Setup,
+		schema.GroupKind{Group: relayCrdGroup, Kind: "NamespaceAuthorizationRule"}:        namespaceauthorizationrule.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

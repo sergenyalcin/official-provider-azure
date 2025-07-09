@@ -5,22 +5,25 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	healthbot "github.com/upbound/provider-azure/internal/controller/namespaced/healthbot/healthbot"
 )
 
+var healthbotCrdGroup = "healthbot.azure.m.upbound.io"
+
 // Setup_healthbot creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_healthbot(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		healthbot.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: healthbotCrdGroup, Kind: "HealthBot"}: healthbot.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

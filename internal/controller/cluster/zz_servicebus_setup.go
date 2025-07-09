@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/namespaceauthorizationrule"
 	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/namespacedisasterrecoveryconfig"
@@ -21,24 +23,25 @@ import (
 	topicauthorizationrule "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/topicauthorizationrule"
 )
 
+var servicebusCrdGroup = "servicebus.azure.upbound.io"
+
 // Setup_servicebus creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_servicebus(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		namespaceauthorizationrule.Setup,
-		namespacedisasterrecoveryconfig.Setup,
-		namespacenetworkruleset.Setup,
-		queue.Setup,
-		queueauthorizationrule.Setup,
-		servicebusnamespace.Setup,
-		subscription.Setup,
-		subscriptionrule.Setup,
-		topic.Setup,
-		topicauthorizationrule.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "NamespaceAuthorizationRule"}:      namespaceauthorizationrule.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "NamespaceDisasterRecoveryConfig"}: namespacedisasterrecoveryconfig.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "NamespaceNetworkRuleSet"}:         namespacenetworkruleset.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "Queue"}:                           queue.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "QueueAuthorizationRule"}:          queueauthorizationrule.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "ServiceBusNamespace"}:             servicebusnamespace.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "Subscription"}:                    subscription.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "SubscriptionRule"}:                subscriptionrule.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "Topic"}:                           topic.Setup,
+		schema.GroupKind{Group: servicebusCrdGroup, Kind: "TopicAuthorizationRule"}:          topicauthorizationrule.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

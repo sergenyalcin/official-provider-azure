@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	sentinelalertrulefusion "github.com/upbound/provider-azure/internal/controller/cluster/securityinsights/sentinelalertrulefusion"
 	sentinelalertrulemachinelearningbehavioranalytics "github.com/upbound/provider-azure/internal/controller/cluster/securityinsights/sentinelalertrulemachinelearningbehavioranalytics"
@@ -18,21 +20,22 @@ import (
 	sentinelwatchlist "github.com/upbound/provider-azure/internal/controller/cluster/securityinsights/sentinelwatchlist"
 )
 
+var securityinsightsCrdGroup = "securityinsights.azure.upbound.io"
+
 // Setup_securityinsights creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_securityinsights(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		sentinelalertrulefusion.Setup,
-		sentinelalertrulemachinelearningbehavioranalytics.Setup,
-		sentinelalertrulemssecurityincident.Setup,
-		sentinelautomationrule.Setup,
-		sentineldataconnectoriot.Setup,
-		sentinelloganalyticsworkspaceonboarding.Setup,
-		sentinelwatchlist.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelAlertRuleFusion"}:                           sentinelalertrulefusion.Setup,
+		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelAlertRuleMSSecurityIncident"}:               sentinelalertrulemssecurityincident.Setup,
+		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelAlertRuleMachineLearningBehaviorAnalytics"}: sentinelalertrulemachinelearningbehavioranalytics.Setup,
+		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelAutomationRule"}:                            sentinelautomationrule.Setup,
+		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelDataConnectorIOT"}:                          sentineldataconnectoriot.Setup,
+		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelLogAnalyticsWorkspaceOnboarding"}:           sentinelloganalyticsworkspaceonboarding.Setup,
+		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelWatchlist"}:                                 sentinelwatchlist.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

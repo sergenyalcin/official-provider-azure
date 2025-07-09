@@ -5,22 +5,25 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	policyvirtualmachineconfigurationassignment "github.com/upbound/provider-azure/internal/controller/namespaced/guestconfiguration/policyvirtualmachineconfigurationassignment"
 )
 
+var guestconfigurationCrdGroup = "guestconfiguration.azure.m.upbound.io"
+
 // Setup_guestconfiguration creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_guestconfiguration(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		policyvirtualmachineconfigurationassignment.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: guestconfigurationCrdGroup, Kind: "PolicyVirtualMachineConfigurationAssignment"}: policyvirtualmachineconfigurationassignment.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

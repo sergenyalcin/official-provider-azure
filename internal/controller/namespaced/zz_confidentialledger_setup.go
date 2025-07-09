@@ -5,22 +5,25 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	ledger "github.com/upbound/provider-azure/internal/controller/namespaced/confidentialledger/ledger"
 )
 
+var confidentialledgerCrdGroup = "confidentialledger.azure.m.upbound.io"
+
 // Setup_confidentialledger creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_confidentialledger(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		ledger.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: confidentialledgerCrdGroup, Kind: "Ledger"}: ledger.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

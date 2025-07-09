@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	globalvmshutdownschedule "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/globalvmshutdownschedule"
 	lab "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/lab"
@@ -18,21 +20,22 @@ import (
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/windowsvirtualmachine"
 )
 
+var devtestlabCrdGroup = "devtestlab.azure.upbound.io"
+
 // Setup_devtestlab creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_devtestlab(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		globalvmshutdownschedule.Setup,
-		lab.Setup,
-		linuxvirtualmachine.Setup,
-		policy.Setup,
-		schedule.Setup,
-		virtualnetwork.Setup,
-		windowsvirtualmachine.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "GlobalVMShutdownSchedule"}: globalvmshutdownschedule.Setup,
+		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "Lab"}:                      lab.Setup,
+		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "LinuxVirtualMachine"}:      linuxvirtualmachine.Setup,
+		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "Policy"}:                   policy.Setup,
+		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "Schedule"}:                 schedule.Setup,
+		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "VirtualNetwork"}:           virtualnetwork.Setup,
+		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "WindowsVirtualMachine"}:    windowsvirtualmachine.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

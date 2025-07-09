@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	firewallrule "github.com/upbound/provider-azure/internal/controller/namespaced/synapse/firewallrule"
 	integrationruntimeazure "github.com/upbound/provider-azure/internal/controller/namespaced/synapse/integrationruntimeazure"
@@ -30,33 +32,34 @@ import (
 	workspacevulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/namespaced/synapse/workspacevulnerabilityassessment"
 )
 
+var synapseCrdGroup = "synapse.azure.m.upbound.io"
+
 // Setup_synapse creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_synapse(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		firewallrule.Setup,
-		integrationruntimeazure.Setup,
-		integrationruntimeselfhosted.Setup,
-		linkedservice.Setup,
-		managedprivateendpoint.Setup,
-		privatelinkhub.Setup,
-		roleassignment.Setup,
-		sparkpool.Setup,
-		sqlpool.Setup,
-		sqlpoolextendedauditingpolicy.Setup,
-		sqlpoolsecurityalertpolicy.Setup,
-		sqlpoolworkloadclassifier.Setup,
-		sqlpoolworkloadgroup.Setup,
-		workspace.Setup,
-		workspaceaadadmin.Setup,
-		workspaceextendedauditingpolicy.Setup,
-		workspacesecurityalertpolicy.Setup,
-		workspacesqlaadadmin.Setup,
-		workspacevulnerabilityassessment.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "FirewallRule"}:                     firewallrule.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "IntegrationRuntimeAzure"}:          integrationruntimeazure.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "IntegrationRuntimeSelfHosted"}:     integrationruntimeselfhosted.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "LinkedService"}:                    linkedservice.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "ManagedPrivateEndpoint"}:           managedprivateendpoint.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "PrivateLinkHub"}:                   privatelinkhub.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "RoleAssignment"}:                   roleassignment.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "SQLPool"}:                          sqlpool.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "SQLPoolExtendedAuditingPolicy"}:    sqlpoolextendedauditingpolicy.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "SQLPoolSecurityAlertPolicy"}:       sqlpoolsecurityalertpolicy.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "SQLPoolWorkloadClassifier"}:        sqlpoolworkloadclassifier.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "SQLPoolWorkloadGroup"}:             sqlpoolworkloadgroup.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "SparkPool"}:                        sparkpool.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "Workspace"}:                        workspace.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "WorkspaceAADAdmin"}:                workspaceaadadmin.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "WorkspaceExtendedAuditingPolicy"}:  workspaceextendedauditingpolicy.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "WorkspaceSQLAADAdmin"}:             workspacesqlaadadmin.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "WorkspaceSecurityAlertPolicy"}:     workspacesecurityalertpolicy.Setup,
+		schema.GroupKind{Group: synapseCrdGroup, Kind: "WorkspaceVulnerabilityAssessment"}: workspacevulnerabilityassessment.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

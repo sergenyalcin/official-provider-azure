@@ -7,6 +7,7 @@ package namespaced
 import (
 	"context"
 	_ "embed"
+
 	"github.com/crossplane/upjet/pkg/config"
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/registry/reference"
@@ -159,8 +160,11 @@ func GetProvider(ctx context.Context, sdkProvider *schema.Provider, generationPr
 	// We need to include the controllers for this group into the base packages
 	// list to get their controllers packaged together with the config package
 	// controllers (provider family config package).
-	for _, c := range []string{"azure/resourcegroup", "azure/resourceproviderregistration", "azure/subscription"} {
-		pc.BasePackages.ControllerMap[c] = "config"
+	for k, v := range map[string]string{"azure/resourcegroup": "ResourceGroup", "azure/resourceproviderregistration": "ResourceProviderRegistration", "azure/subscription": "Subscription"} {
+		pc.BasePackages.ControllerMap[k] = ujconfig.BasePackagesControllerMeta{
+			PkgPath: "config",
+			Kind:    v,
+		}
 	}
 
 	// API group overrides from Terraform import statements

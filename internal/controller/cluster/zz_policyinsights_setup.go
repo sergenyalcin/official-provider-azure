@@ -5,24 +5,27 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	resourcepolicyremediation "github.com/upbound/provider-azure/internal/controller/cluster/policyinsights/resourcepolicyremediation"
 	subscriptionpolicyremediation "github.com/upbound/provider-azure/internal/controller/cluster/policyinsights/subscriptionpolicyremediation"
 )
 
+var policyinsightsCrdGroup = "policyinsights.azure.upbound.io"
+
 // Setup_policyinsights creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_policyinsights(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		resourcepolicyremediation.Setup,
-		subscriptionpolicyremediation.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: policyinsightsCrdGroup, Kind: "ResourcePolicyRemediation"}:     resourcepolicyremediation.Setup,
+		schema.GroupKind{Group: policyinsightsCrdGroup, Kind: "SubscriptionPolicyRemediation"}: subscriptionpolicyremediation.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

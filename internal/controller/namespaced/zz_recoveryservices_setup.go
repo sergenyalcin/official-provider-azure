@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	backupcontainerstorageaccount "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backupcontainerstorageaccount"
 	backuppolicyfileshare "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backuppolicyfileshare"
@@ -23,26 +25,27 @@ import (
 	vault "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/vault"
 )
 
+var recoveryservicesCrdGroup = "recoveryservices.azure.m.upbound.io"
+
 // Setup_recoveryservices creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_recoveryservices(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		backupcontainerstorageaccount.Setup,
-		backuppolicyfileshare.Setup,
-		backuppolicyvm.Setup,
-		backuppolicyvmworkload.Setup,
-		backupprotectedfileshare.Setup,
-		backupprotectedvm.Setup,
-		siterecoveryfabric.Setup,
-		siterecoverynetworkmapping.Setup,
-		siterecoveryprotectioncontainer.Setup,
-		siterecoveryprotectioncontainermapping.Setup,
-		siterecoveryreplicationpolicy.Setup,
-		vault.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "BackupContainerStorageAccount"}:          backupcontainerstorageaccount.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "BackupPolicyFileShare"}:                  backuppolicyfileshare.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "BackupPolicyVM"}:                         backuppolicyvm.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "BackupPolicyVMWorkload"}:                 backuppolicyvmworkload.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "BackupProtectedFileShare"}:               backupprotectedfileshare.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "BackupProtectedVM"}:                      backupprotectedvm.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "SiteRecoveryFabric"}:                     siterecoveryfabric.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "SiteRecoveryNetworkMapping"}:             siterecoverynetworkmapping.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "SiteRecoveryProtectionContainer"}:        siterecoveryprotectioncontainer.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "SiteRecoveryProtectionContainerMapping"}: siterecoveryprotectioncontainermapping.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "SiteRecoveryReplicationPolicy"}:          siterecoveryreplicationpolicy.Setup,
+		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "Vault"}:                                  vault.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

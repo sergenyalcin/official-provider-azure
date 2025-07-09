@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	mssqldatabase "github.com/upbound/provider-azure/internal/controller/cluster/sql/mssqldatabase"
 	mssqldatabaseextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/cluster/sql/mssqldatabaseextendedauditingpolicy"
@@ -33,36 +35,37 @@ import (
 	mssqlvirtualnetworkrule "github.com/upbound/provider-azure/internal/controller/cluster/sql/mssqlvirtualnetworkrule"
 )
 
+var sqlCrdGroup = "sql.azure.upbound.io"
+
 // Setup_sql creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_sql(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		mssqldatabase.Setup,
-		mssqldatabaseextendedauditingpolicy.Setup,
-		mssqldatabasevulnerabilityassessmentrulebaseline.Setup,
-		mssqlelasticpool.Setup,
-		mssqlfailovergroup.Setup,
-		mssqlfirewallrule.Setup,
-		mssqljobagent.Setup,
-		mssqljobcredential.Setup,
-		mssqlmanageddatabase.Setup,
-		mssqlmanagedinstance.Setup,
-		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
-		mssqlmanagedinstancefailovergroup.Setup,
-		mssqlmanagedinstancetransparentdataencryption.Setup,
-		mssqlmanagedinstancevulnerabilityassessment.Setup,
-		mssqloutboundfirewallrule.Setup,
-		mssqlserver.Setup,
-		mssqlserverdnsalias.Setup,
-		mssqlservermicrosoftsupportauditingpolicy.Setup,
-		mssqlserversecurityalertpolicy.Setup,
-		mssqlservertransparentdataencryption.Setup,
-		mssqlservervulnerabilityassessment.Setup,
-		mssqlvirtualnetworkrule.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLDatabase"}:                                    mssqldatabase.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLDatabaseExtendedAuditingPolicy"}:              mssqldatabaseextendedauditingpolicy.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLDatabaseVulnerabilityAssessmentRuleBaseline"}: mssqldatabasevulnerabilityassessmentrulebaseline.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLElasticPool"}:                                 mssqlelasticpool.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLFailoverGroup"}:                               mssqlfailovergroup.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLFirewallRule"}:                                mssqlfirewallrule.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLJobAgent"}:                                    mssqljobagent.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLJobCredential"}:                               mssqljobcredential.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLManagedDatabase"}:                             mssqlmanageddatabase.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLManagedInstance"}:                             mssqlmanagedinstance.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLManagedInstanceActiveDirectoryAdministrator"}: mssqlmanagedinstanceactivedirectoryadministrator.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLManagedInstanceFailoverGroup"}:                mssqlmanagedinstancefailovergroup.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLManagedInstanceTransparentDataEncryption"}:    mssqlmanagedinstancetransparentdataencryption.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLManagedInstanceVulnerabilityAssessment"}:      mssqlmanagedinstancevulnerabilityassessment.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLOutboundFirewallRule"}:                        mssqloutboundfirewallrule.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLServer"}:                                      mssqlserver.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLServerDNSAlias"}:                              mssqlserverdnsalias.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLServerMicrosoftSupportAuditingPolicy"}:        mssqlservermicrosoftsupportauditingpolicy.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLServerSecurityAlertPolicy"}:                   mssqlserversecurityalertpolicy.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLServerTransparentDataEncryption"}:             mssqlservertransparentdataencryption.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLServerVulnerabilityAssessment"}:               mssqlservervulnerabilityassessment.Setup,
+		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLVirtualNetworkRule"}:                          mssqlvirtualnetworkrule.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

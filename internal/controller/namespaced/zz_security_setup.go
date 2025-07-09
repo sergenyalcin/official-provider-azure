@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	advancedthreatprotection "github.com/upbound/provider-azure/internal/controller/namespaced/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/provider-azure/internal/controller/namespaced/security/iotsecuritydevicegroup"
@@ -24,27 +26,28 @@ import (
 	storagedefender "github.com/upbound/provider-azure/internal/controller/namespaced/security/storagedefender"
 )
 
+var securityCrdGroup = "security.azure.m.upbound.io"
+
 // Setup_security creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_security(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		advancedthreatprotection.Setup,
-		iotsecuritydevicegroup.Setup,
-		iotsecuritysolution.Setup,
-		securitycenterassessment.Setup,
-		securitycenterassessmentpolicy.Setup,
-		securitycenterautoprovisioning.Setup,
-		securitycentercontact.Setup,
-		securitycenterservervulnerabilityassessment.Setup,
-		securitycenterservervulnerabilityassessmentvirtualmachine.Setup,
-		securitycentersetting.Setup,
-		securitycentersubscriptionpricing.Setup,
-		securitycenterworkspace.Setup,
-		storagedefender.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: securityCrdGroup, Kind: "AdvancedThreatProtection"}:                                  advancedthreatprotection.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "IOTSecurityDeviceGroup"}:                                    iotsecuritydevicegroup.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "IOTSecuritySolution"}:                                       iotsecuritysolution.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterAssessment"}:                                  securitycenterassessment.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterAssessmentPolicy"}:                            securitycenterassessmentpolicy.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterAutoProvisioning"}:                            securitycenterautoprovisioning.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterContact"}:                                     securitycentercontact.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterServerVulnerabilityAssessment"}:               securitycenterservervulnerabilityassessment.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterServerVulnerabilityAssessmentVirtualMachine"}: securitycenterservervulnerabilityassessmentvirtualmachine.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterSetting"}:                                     securitycentersetting.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterSubscriptionPricing"}:                         securitycentersubscriptionpricing.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "SecurityCenterWorkspace"}:                                   securitycenterworkspace.Setup,
+		schema.GroupKind{Group: securityCrdGroup, Kind: "StorageDefender"}:                                           storagedefender.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

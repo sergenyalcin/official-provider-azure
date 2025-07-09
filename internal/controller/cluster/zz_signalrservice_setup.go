@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	networkacl "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/networkacl"
 	service "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/service"
@@ -17,20 +19,21 @@ import (
 	webpubsubnetworkacl "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/webpubsubnetworkacl"
 )
 
+var signalrserviceCrdGroup = "signalrservice.azure.upbound.io"
+
 // Setup_signalrservice creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_signalrservice(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		networkacl.Setup,
-		service.Setup,
-		signalrsharedprivatelinkresource.Setup,
-		webpubsub.Setup,
-		webpubsubhub.Setup,
-		webpubsubnetworkacl.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "NetworkACL"}:                       networkacl.Setup,
+		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "Service"}:                          service.Setup,
+		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "SignalrSharedPrivateLinkResource"}: signalrsharedprivatelinkresource.Setup,
+		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "WebPubsub"}:                        webpubsub.Setup,
+		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "WebPubsubHub"}:                     webpubsubhub.Setup,
+		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "WebPubsubNetworkACL"}:              webpubsubnetworkacl.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

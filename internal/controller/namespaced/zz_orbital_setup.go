@@ -5,24 +5,27 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	contactprofile "github.com/upbound/provider-azure/internal/controller/namespaced/orbital/contactprofile"
 	spacecraft "github.com/upbound/provider-azure/internal/controller/namespaced/orbital/spacecraft"
 )
 
+var orbitalCrdGroup = "orbital.azure.m.upbound.io"
+
 // Setup_orbital creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_orbital(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		contactprofile.Setup,
-		spacecraft.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: orbitalCrdGroup, Kind: "ContactProfile"}: contactprofile.Setup,
+		schema.GroupKind{Group: orbitalCrdGroup, Kind: "Spacecraft"}:     spacecraft.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

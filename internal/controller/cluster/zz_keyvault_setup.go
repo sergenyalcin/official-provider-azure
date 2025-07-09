@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/cluster/keyvault/accesspolicy"
 	certificate "github.com/upbound/provider-azure/internal/controller/cluster/keyvault/certificate"
@@ -21,24 +23,25 @@ import (
 	vault "github.com/upbound/provider-azure/internal/controller/cluster/keyvault/vault"
 )
 
+var keyvaultCrdGroup = "keyvault.azure.upbound.io"
+
 // Setup_keyvault creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_keyvault(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		accesspolicy.Setup,
-		certificate.Setup,
-		certificatecontacts.Setup,
-		certificateissuer.Setup,
-		key.Setup,
-		managedhardwaresecuritymodule.Setup,
-		managedstorageaccount.Setup,
-		managedstorageaccountsastokendefinition.Setup,
-		secret.Setup,
-		vault.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "AccessPolicy"}:                            accesspolicy.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "Certificate"}:                             certificate.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "CertificateContacts"}:                     certificatecontacts.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "CertificateIssuer"}:                       certificateissuer.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "Key"}:                                     key.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "ManagedHardwareSecurityModule"}:           managedhardwaresecuritymodule.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "ManagedStorageAccount"}:                   managedstorageaccount.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "ManagedStorageAccountSASTokenDefinition"}: managedstorageaccountsastokendefinition.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "Secret"}:                                  secret.Setup,
+		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "Vault"}:                                   vault.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/cluster/containerservice/kubernetescluster"
 	kubernetesclusterextension "github.com/upbound/provider-azure/internal/controller/cluster/containerservice/kubernetesclusterextension"
@@ -15,18 +17,19 @@ import (
 	kubernetesfleetmanager "github.com/upbound/provider-azure/internal/controller/cluster/containerservice/kubernetesfleetmanager"
 )
 
+var containerserviceCrdGroup = "containerservice.azure.upbound.io"
+
 // Setup_containerservice creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_containerservice(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		kubernetescluster.Setup,
-		kubernetesclusterextension.Setup,
-		kubernetesclusternodepool.Setup,
-		kubernetesfleetmanager.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: containerserviceCrdGroup, Kind: "KubernetesCluster"}:          kubernetescluster.Setup,
+		schema.GroupKind{Group: containerserviceCrdGroup, Kind: "KubernetesClusterExtension"}: kubernetesclusterextension.Setup,
+		schema.GroupKind{Group: containerserviceCrdGroup, Kind: "KubernetesClusterNodePool"}:  kubernetesclusternodepool.Setup,
+		schema.GroupKind{Group: containerserviceCrdGroup, Kind: "KubernetesFleetManager"}:     kubernetesfleetmanager.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

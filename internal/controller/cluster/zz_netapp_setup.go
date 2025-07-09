@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	account "github.com/upbound/provider-azure/internal/controller/cluster/netapp/account"
 	pool "github.com/upbound/provider-azure/internal/controller/cluster/netapp/pool"
@@ -16,19 +18,20 @@ import (
 	volume "github.com/upbound/provider-azure/internal/controller/cluster/netapp/volume"
 )
 
+var netappCrdGroup = "netapp.azure.upbound.io"
+
 // Setup_netapp creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_netapp(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		account.Setup,
-		pool.Setup,
-		snapshot.Setup,
-		snapshotpolicy.Setup,
-		volume.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: netappCrdGroup, Kind: "Account"}:        account.Setup,
+		schema.GroupKind{Group: netappCrdGroup, Kind: "Pool"}:           pool.Setup,
+		schema.GroupKind{Group: netappCrdGroup, Kind: "Snapshot"}:       snapshot.Setup,
+		schema.GroupKind{Group: netappCrdGroup, Kind: "SnapshotPolicy"}: snapshotpolicy.Setup,
+		schema.GroupKind{Group: netappCrdGroup, Kind: "Volume"}:         volume.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

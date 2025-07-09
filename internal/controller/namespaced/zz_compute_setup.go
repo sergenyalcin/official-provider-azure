@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	availabilityset "github.com/upbound/provider-azure/internal/controller/namespaced/compute/availabilityset"
 	capacityreservation "github.com/upbound/provider-azure/internal/controller/namespaced/compute/capacityreservation"
@@ -35,38 +37,39 @@ import (
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/namespaced/compute/windowsvirtualmachinescaleset"
 )
 
+var computeCrdGroup = "compute.azure.m.upbound.io"
+
 // Setup_compute creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_compute(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		availabilityset.Setup,
-		capacityreservation.Setup,
-		capacityreservationgroup.Setup,
-		dedicatedhost.Setup,
-		diskaccess.Setup,
-		diskencryptionset.Setup,
-		galleryapplication.Setup,
-		galleryapplicationversion.Setup,
-		image.Setup,
-		linuxvirtualmachine.Setup,
-		linuxvirtualmachinescaleset.Setup,
-		manageddisk.Setup,
-		manageddisksastoken.Setup,
-		orchestratedvirtualmachinescaleset.Setup,
-		proximityplacementgroup.Setup,
-		sharedimage.Setup,
-		sharedimagegallery.Setup,
-		snapshot.Setup,
-		sshpublickey.Setup,
-		virtualmachinedatadiskattachment.Setup,
-		virtualmachineextension.Setup,
-		virtualmachineruncommand.Setup,
-		windowsvirtualmachine.Setup,
-		windowsvirtualmachinescaleset.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: computeCrdGroup, Kind: "AvailabilitySet"}:                    availabilityset.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "CapacityReservation"}:                capacityreservation.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "CapacityReservationGroup"}:           capacityreservationgroup.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "DedicatedHost"}:                      dedicatedhost.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "DiskAccess"}:                         diskaccess.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "DiskEncryptionSet"}:                  diskencryptionset.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "GalleryApplication"}:                 galleryapplication.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "GalleryApplicationVersion"}:          galleryapplicationversion.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "Image"}:                              image.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "LinuxVirtualMachine"}:                linuxvirtualmachine.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "LinuxVirtualMachineScaleSet"}:        linuxvirtualmachinescaleset.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "ManagedDisk"}:                        manageddisk.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "ManagedDiskSASToken"}:                manageddisksastoken.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "OrchestratedVirtualMachineScaleSet"}: orchestratedvirtualmachinescaleset.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "ProximityPlacementGroup"}:            proximityplacementgroup.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "SSHPublicKey"}:                       sshpublickey.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "SharedImage"}:                        sharedimage.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "SharedImageGallery"}:                 sharedimagegallery.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "Snapshot"}:                           snapshot.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "VirtualMachineDataDiskAttachment"}:   virtualmachinedatadiskattachment.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "VirtualMachineExtension"}:            virtualmachineextension.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "VirtualMachineRunCommand"}:           virtualmachineruncommand.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "WindowsVirtualMachine"}:              windowsvirtualmachine.Setup,
+		schema.GroupKind{Group: computeCrdGroup, Kind: "WindowsVirtualMachineScaleSet"}:      windowsvirtualmachinescaleset.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

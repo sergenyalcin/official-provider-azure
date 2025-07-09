@@ -5,24 +5,27 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	iothubdeviceupdateaccount "github.com/upbound/provider-azure/internal/controller/cluster/deviceupdate/iothubdeviceupdateaccount"
 	iothubdeviceupdateinstance "github.com/upbound/provider-azure/internal/controller/cluster/deviceupdate/iothubdeviceupdateinstance"
 )
 
+var deviceupdateCrdGroup = "deviceupdate.azure.upbound.io"
+
 // Setup_deviceupdate creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_deviceupdate(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		iothubdeviceupdateaccount.Setup,
-		iothubdeviceupdateinstance.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: deviceupdateCrdGroup, Kind: "IOTHubDeviceUpdateAccount"}:  iothubdeviceupdateaccount.Setup,
+		schema.GroupKind{Group: deviceupdateCrdGroup, Kind: "IOTHubDeviceUpdateInstance"}: iothubdeviceupdateinstance.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

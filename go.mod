@@ -11,7 +11,7 @@ toolchain go1.24.5
 replace (
 	github.com/crossplane/crossplane-runtime => github.com/erhancagirici/crossplane-runtime v0.0.0-20250709142654-998b18a399d2
 	github.com/crossplane/crossplane-tools => github.com/erhancagirici/crossplane-tools v0.0.0-20250708081606-c62c0d527ca1
-	github.com/crossplane/upjet => github.com/erhancagirici/upjet v0.0.0-20250709142839-5347b06d57b2
+	github.com/crossplane/upjet => github.com/sergenyalcin/upjet v0.0.0-20250709163443-33e30ba731b7
 )
 
 require (

@@ -183,8 +183,11 @@ func GetProvider(_ context.Context, sdkProvider *schema.Provider, generationProv
 	// We need to include the controllers for this group into the base packages
 	// list to get their controllers packaged together with the config package
 	// controllers (provider family config package).
-	for _, c := range []string{"azure/resourcegroup", "azure/resourceproviderregistration", "azure/subscription"} {
-		pc.BasePackages.ControllerMap[c] = "config"
+	for k, v := range map[string]string{"azure/resourcegroup": "ResourceGroup", "azure/resourceproviderregistration": "ResourceProviderRegistration", "azure/subscription": "Subscription"} {
+		pc.BasePackages.ControllerMap[k] = ujconfig.BasePackagesControllerMeta{
+			PkgPath: "config",
+			Kind:    v,
+		}
 	}
 
 	// API group overrides from Terraform import statements

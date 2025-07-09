@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	springcloudaccelerator "github.com/upbound/provider-azure/internal/controller/cluster/appplatform/springcloudaccelerator"
 	springcloudactivedeployment "github.com/upbound/provider-azure/internal/controller/cluster/appplatform/springcloudactivedeployment"
@@ -33,36 +35,37 @@ import (
 	springcloudstorage "github.com/upbound/provider-azure/internal/controller/cluster/appplatform/springcloudstorage"
 )
 
+var appplatformCrdGroup = "appplatform.azure.upbound.io"
+
 // Setup_appplatform creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_appplatform(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		springcloudaccelerator.Setup,
-		springcloudactivedeployment.Setup,
-		springcloudapiportal.Setup,
-		springcloudapiportalcustomdomain.Setup,
-		springcloudapp.Setup,
-		springcloudappcosmosdbassociation.Setup,
-		springcloudappmysqlassociation.Setup,
-		springcloudappredisassociation.Setup,
-		springcloudbuilddeployment.Setup,
-		springcloudbuilder.Setup,
-		springcloudbuildpackbinding.Setup,
-		springcloudcertificate.Setup,
-		springcloudconfigurationservice.Setup,
-		springcloudcontainerdeployment.Setup,
-		springcloudcustomdomain.Setup,
-		springcloudcustomizedaccelerator.Setup,
-		springclouddevtoolportal.Setup,
-		springcloudgateway.Setup,
-		springcloudgatewaycustomdomain.Setup,
-		springcloudjavadeployment.Setup,
-		springcloudservice.Setup,
-		springcloudstorage.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudAPIPortal"}:              springcloudapiportal.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudAPIPortalCustomDomain"}:  springcloudapiportalcustomdomain.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudAccelerator"}:            springcloudaccelerator.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudActiveDeployment"}:       springcloudactivedeployment.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudApp"}:                    springcloudapp.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudAppCosmosDBAssociation"}: springcloudappcosmosdbassociation.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudAppMySQLAssociation"}:    springcloudappmysqlassociation.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudAppRedisAssociation"}:    springcloudappredisassociation.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudBuildDeployment"}:        springcloudbuilddeployment.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudBuildPackBinding"}:       springcloudbuildpackbinding.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudBuilder"}:                springcloudbuilder.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudCertificate"}:            springcloudcertificate.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudConfigurationService"}:   springcloudconfigurationservice.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudContainerDeployment"}:    springcloudcontainerdeployment.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudCustomDomain"}:           springcloudcustomdomain.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudCustomizedAccelerator"}:  springcloudcustomizedaccelerator.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudDevToolPortal"}:          springclouddevtoolportal.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudGateway"}:                springcloudgateway.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudGatewayCustomDomain"}:    springcloudgatewaycustomdomain.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudJavaDeployment"}:         springcloudjavadeployment.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudService"}:                springcloudservice.Setup,
+		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudStorage"}:                springcloudstorage.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }

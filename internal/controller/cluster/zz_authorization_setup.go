@@ -5,9 +5,11 @@
 package controller
 
 import (
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/dynamiccrd"
 
 	managementgrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/cluster/authorization/managementgrouppolicyassignment"
 	managementgrouppolicyexemption "github.com/upbound/provider-azure/internal/controller/cluster/authorization/managementgrouppolicyexemption"
@@ -27,30 +29,31 @@ import (
 	trustedaccessrolebinding "github.com/upbound/provider-azure/internal/controller/cluster/authorization/trustedaccessrolebinding"
 )
 
+var authorizationCrdGroup = "authorization.azure.upbound.io"
+
 // Setup_authorization creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
-	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		managementgrouppolicyassignment.Setup,
-		managementgrouppolicyexemption.Setup,
-		managementlock.Setup,
-		pimactiveroleassignment.Setup,
-		pimeligibleroleassignment.Setup,
-		policydefinition.Setup,
-		policysetdefinition.Setup,
-		resourcegrouppolicyassignment.Setup,
-		resourcegrouppolicyexemption.Setup,
-		resourcepolicyassignment.Setup,
-		resourcepolicyexemption.Setup,
-		roleassignment.Setup,
-		roledefinition.Setup,
-		subscriptionpolicyassignment.Setup,
-		subscriptionpolicyexemption.Setup,
-		trustedaccessrolebinding.Setup,
-	} {
-		if err := setup(mgr, o); err != nil {
-			return err
-		}
+	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "ManagementGroupPolicyAssignment"}: managementgrouppolicyassignment.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "ManagementGroupPolicyExemption"}:  managementgrouppolicyexemption.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "ManagementLock"}:                  managementlock.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "PimActiveRoleAssignment"}:         pimactiveroleassignment.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "PimEligibleRoleAssignment"}:       pimeligibleroleassignment.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "PolicyDefinition"}:                policydefinition.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "PolicySetDefinition"}:             policysetdefinition.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "ResourceGroupPolicyAssignment"}:   resourcegrouppolicyassignment.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "ResourceGroupPolicyExemption"}:    resourcegrouppolicyexemption.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "ResourcePolicyAssignment"}:        resourcepolicyassignment.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "ResourcePolicyExemption"}:         resourcepolicyexemption.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "RoleAssignment"}:                  roleassignment.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "RoleDefinition"}:                  roledefinition.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "SubscriptionPolicyAssignment"}:    subscriptionpolicyassignment.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "SubscriptionPolicyExemption"}:     subscriptionpolicyexemption.Setup,
+		schema.GroupKind{Group: authorizationCrdGroup, Kind: "TrustedAccessRoleBinding"}:        trustedaccessrolebinding.Setup,
+	}
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+		return err
 	}
 	return nil
 }
