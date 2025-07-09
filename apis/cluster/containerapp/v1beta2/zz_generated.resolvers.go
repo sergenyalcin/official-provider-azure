@@ -34,6 +34,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},

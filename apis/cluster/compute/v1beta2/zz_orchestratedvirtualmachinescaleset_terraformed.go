@@ -21,7 +21,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) GetTerraformResourceType() string 
 
 // GetConnectionDetailsMapping for this OrchestratedVirtualMachineScaleSet
 func (tr *OrchestratedVirtualMachineScaleSet) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"extension[*].protected_settings": "extension[*].protectedSettingsSecretRef", "os_profile[*].custom_data": "osProfile[*].customDataSecretRef", "os_profile[*].linux_configuration[*].admin_password": "osProfile[*].linuxConfiguration[*].adminPasswordSecretRef", "os_profile[*].windows_configuration[*].additional_unattend_content[*].content": "osProfile[*].windowsConfiguration[*].additionalUnattendContent[*].contentSecretRef", "os_profile[*].windows_configuration[*].admin_password": "osProfile[*].windowsConfiguration[*].adminPasswordSecretRef", "user_data_base64": "userDataBase64SecretRef"}
+	return map[string]string{"extension[*].protected_settings": "extension[*].protectedSettingsSecretRef", "os_profile[*].custom_data": "osProfile.customDataSecretRef", "os_profile[*].linux_configuration[*].admin_password": "osProfile.linuxConfiguration.adminPasswordSecretRef", "os_profile[*].windows_configuration[*].additional_unattend_content[*].content": "osProfile.windowsConfiguration.additionalUnattendContent[*].contentSecretRef", "os_profile[*].windows_configuration[*].admin_password": "osProfile.windowsConfiguration.adminPasswordSecretRef", "user_data_base64": "userDataBase64SecretRef"}
 }
 
 // GetObservation of this OrchestratedVirtualMachineScaleSet
@@ -84,7 +84,7 @@ func (tr *OrchestratedVirtualMachineScaleSet) GetInitParameters() (map[string]an
 func (tr *OrchestratedVirtualMachineScaleSet) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *OrchestratedVirtualMachineScaleSet) GetMergedParameters(shouldMergeIni
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *OrchestratedVirtualMachineScaleSet) GetMergedParameters(shouldMergeIni
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

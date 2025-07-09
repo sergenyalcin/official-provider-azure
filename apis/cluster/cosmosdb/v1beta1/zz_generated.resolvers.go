@@ -38,6 +38,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -58,6 +59,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -78,6 +80,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDRef,
 				Selector:     mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -99,6 +102,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -120,6 +124,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountIDRef,
 				Selector:     mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -153,6 +158,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -172,6 +178,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -191,6 +198,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegatedManagementSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DelegatedManagementSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -222,6 +230,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CassandraClusterIDRef,
 			Selector:     mg.Spec.ForProvider.CassandraClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -241,6 +250,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -260,6 +270,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegatedManagementSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DelegatedManagementSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -291,6 +302,7 @@ func (mg *CassandraKeySpace) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -310,6 +322,7 @@ func (mg *CassandraKeySpace) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -341,6 +354,7 @@ func (mg *CassandraTable) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraKeySpaceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CassandraKeySpaceIDRef,
 			Selector:     mg.Spec.ForProvider.CassandraKeySpaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -372,6 +386,7 @@ func (mg *GremlinDatabase) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -391,6 +406,7 @@ func (mg *GremlinDatabase) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -422,6 +438,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -441,6 +458,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -460,6 +478,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -491,6 +510,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -510,6 +530,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -529,6 +550,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -560,6 +582,7 @@ func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -579,6 +602,7 @@ func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -610,6 +634,7 @@ func (mg *MongoRoleDefinition) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosMongoDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.CosmosMongoDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -629,6 +654,7 @@ func (mg *MongoRoleDefinition) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosMongoDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.CosmosMongoDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -660,6 +686,7 @@ func (mg *MongoUserDefinition) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosMongoDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.CosmosMongoDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -679,6 +706,7 @@ func (mg *MongoUserDefinition) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosMongoDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.CosmosMongoDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -710,6 +738,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -729,6 +758,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -748,6 +778,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -779,6 +810,7 @@ func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -798,6 +830,7 @@ func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -829,6 +862,7 @@ func (mg *SQLDedicatedGateway) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosDBAccountID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CosmosDBAccountIDRef,
 			Selector:     mg.Spec.ForProvider.CosmosDBAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -860,6 +894,7 @@ func (mg *SQLFunction) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -891,6 +926,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -910,6 +946,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -929,6 +966,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.RoleDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -948,6 +986,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScopeRef,
 			Selector:     mg.Spec.ForProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -967,6 +1006,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AccountNameRef,
 			Selector:     mg.Spec.InitProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -986,6 +1026,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1005,6 +1046,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.RoleDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1024,6 +1066,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ScopeRef,
 			Selector:     mg.Spec.InitProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1055,6 +1098,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1074,6 +1118,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1093,6 +1138,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AccountNameRef,
 			Selector:     mg.Spec.InitProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1112,6 +1158,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1143,6 +1190,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1162,6 +1210,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerNameRef,
 			Selector:     mg.Spec.ForProvider.ContainerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1181,6 +1230,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1200,6 +1250,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1231,6 +1282,7 @@ func (mg *SQLTrigger) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1262,6 +1314,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1281,6 +1334,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

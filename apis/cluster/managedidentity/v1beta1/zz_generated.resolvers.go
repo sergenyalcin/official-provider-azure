@@ -34,6 +34,7 @@ func (mg *FederatedIdentityCredential) ResolveReferences( // ResolveReferences o
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ParentIDRef,
 			Selector:     mg.Spec.ForProvider.ParentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *FederatedIdentityCredential) ResolveReferences( // ResolveReferences o
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *FederatedIdentityCredential) ResolveReferences( // ResolveReferences o
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +106,7 @@ func (mg *UserAssignedIdentity) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +126,7 @@ func (mg *UserAssignedIdentity) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

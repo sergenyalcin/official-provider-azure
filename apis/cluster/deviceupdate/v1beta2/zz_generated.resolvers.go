@@ -34,6 +34,7 @@ func (mg *IOTHubDeviceUpdateAccount) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -65,6 +66,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeviceUpdateAccountID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DeviceUpdateAccountIDRef,
 			Selector:     mg.Spec.ForProvider.DeviceUpdateAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +87,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DiagnosticStorageAccount.ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DiagnosticStorageAccount.IDRef,
 				Selector:     mg.Spec.ForProvider.DiagnosticStorageAccount.IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -105,6 +108,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IOTHubIDRef,
 			Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -125,6 +129,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DiagnosticStorageAccount.ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DiagnosticStorageAccount.IDRef,
 				Selector:     mg.Spec.InitProvider.DiagnosticStorageAccount.IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -145,6 +150,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IOTHubIDRef,
 			Selector:     mg.Spec.InitProvider.IOTHubIDSelector,
 			To:           reference.To{List: l, Managed: m},

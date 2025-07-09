@@ -36,6 +36,7 @@ func (mg *AccessPolicy) ResolveReferences( // ResolveReferences of this AccessPo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *AccessPolicy) ResolveReferences( // ResolveReferences of this AccessPo
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +88,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +108,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -136,6 +140,7 @@ func (mg *CertificateContacts) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -155,6 +160,7 @@ func (mg *CertificateContacts) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -186,6 +192,7 @@ func (mg *CertificateIssuer) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -205,6 +212,7 @@ func (mg *CertificateIssuer) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -236,6 +244,7 @@ func (mg *Key) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -255,6 +264,7 @@ func (mg *Key) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -286,6 +296,7 @@ func (mg *ManagedHardwareSecurityModule) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -317,6 +328,7 @@ func (mg *ManagedStorageAccount) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -336,6 +348,7 @@ func (mg *ManagedStorageAccount) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -355,6 +368,7 @@ func (mg *ManagedStorageAccount) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -374,6 +388,7 @@ func (mg *ManagedStorageAccount) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -405,6 +420,7 @@ func (mg *ManagedStorageAccountSASTokenDefinition) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedStorageAccountID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedStorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedStorageAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -436,6 +452,7 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -455,6 +472,7 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -486,6 +504,7 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -35,6 +35,7 @@ func (mg *ManagementGroupPolicyAssignment) ResolveReferences( // ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *ManagementGroupPolicyAssignment) ResolveReferences( // ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *ManagementGroupPolicyAssignment) ResolveReferences( // ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +107,7 @@ func (mg *ManagementGroupPolicyExemption) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +127,7 @@ func (mg *ManagementGroupPolicyExemption) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +147,7 @@ func (mg *ManagementGroupPolicyExemption) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -173,6 +179,7 @@ func (mg *ManagementLock) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScopeRef,
 			Selector:     mg.Spec.ForProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -192,6 +199,7 @@ func (mg *ManagementLock) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ScopeRef,
 			Selector:     mg.Spec.InitProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -223,6 +231,7 @@ func (mg *PimActiveRoleAssignment) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScopeRef,
 			Selector:     mg.Spec.ForProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -242,6 +251,7 @@ func (mg *PimActiveRoleAssignment) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ScopeRef,
 			Selector:     mg.Spec.InitProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -273,6 +283,7 @@ func (mg *PimEligibleRoleAssignment) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScopeRef,
 			Selector:     mg.Spec.ForProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -292,6 +303,7 @@ func (mg *PimEligibleRoleAssignment) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ScopeRef,
 			Selector:     mg.Spec.InitProvider.ScopeSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -323,6 +335,7 @@ func (mg *PolicyDefinition) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -342,6 +355,7 @@ func (mg *PolicyDefinition) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -373,6 +387,7 @@ func (mg *PolicySetDefinition) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -392,6 +407,7 @@ func (mg *PolicySetDefinition) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -423,6 +439,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -442,6 +459,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -461,6 +479,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -480,6 +499,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -511,6 +531,7 @@ func (mg *ResourceGroupPolicyExemption) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -530,6 +551,7 @@ func (mg *ResourceGroupPolicyExemption) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -549,6 +571,7 @@ func (mg *ResourceGroupPolicyExemption) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -580,6 +603,7 @@ func (mg *ResourcePolicyAssignment) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -599,6 +623,7 @@ func (mg *ResourcePolicyAssignment) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -630,6 +655,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -649,6 +675,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractParamPath("resource_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -668,6 +695,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -687,6 +715,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      resource.ExtractParamPath("resource_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -718,6 +747,7 @@ func (mg *RoleAssignment) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleDefinitionID),
 			Extract:      resource.ExtractParamPath("role_definition_resource_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.RoleDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -737,6 +767,7 @@ func (mg *RoleAssignment) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleDefinitionID),
 			Extract:      resource.ExtractParamPath("role_definition_resource_id", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.RoleDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -768,6 +799,7 @@ func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -787,6 +819,7 @@ func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -818,6 +851,7 @@ func (mg *SubscriptionPolicyExemption) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -837,6 +871,7 @@ func (mg *SubscriptionPolicyExemption) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -868,6 +903,7 @@ func (mg *TrustedAccessRoleBinding) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KubernetesClusterID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KubernetesClusterIDRef,
 			Selector:     mg.Spec.ForProvider.KubernetesClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -887,6 +923,7 @@ func (mg *TrustedAccessRoleBinding) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.SourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -906,6 +943,7 @@ func (mg *TrustedAccessRoleBinding) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.SourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},

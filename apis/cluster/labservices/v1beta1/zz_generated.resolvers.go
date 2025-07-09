@@ -36,6 +36,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Network[i3].SubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Network[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Network[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -76,6 +78,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Network[i3].SubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Network[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Network[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -110,6 +113,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AllowedRegions),
 			Extract:       resource.ExtractParamPath("location", false),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AllowedRegionsRefs,
 			Selector:      mg.Spec.ForProvider.AllowedRegionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -129,6 +133,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DefaultNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -148,6 +153,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -167,6 +173,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AllowedRegions),
 			Extract:       resource.ExtractParamPath("location", false),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AllowedRegionsRefs,
 			Selector:      mg.Spec.InitProvider.AllowedRegionsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -186,6 +193,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DefaultNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},

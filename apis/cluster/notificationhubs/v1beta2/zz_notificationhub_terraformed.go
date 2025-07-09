@@ -21,7 +21,7 @@ func (mg *NotificationHub) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this NotificationHub
 func (tr *NotificationHub) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"apns_credential[*].token": "apnsCredential[*].tokenSecretRef", "gcm_credential[*].api_key": "gcmCredential[*].apiKeySecretRef"}
+	return map[string]string{"apns_credential[*].token": "apnsCredential.tokenSecretRef", "gcm_credential[*].api_key": "gcmCredential.apiKeySecretRef"}
 }
 
 // GetObservation of this NotificationHub
@@ -84,7 +84,7 @@ func (tr *NotificationHub) GetInitParameters() (map[string]any, error) {
 func (tr *NotificationHub) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *NotificationHub) GetMergedParameters(shouldMergeInitProvider bool) (ma
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *NotificationHub) GetMergedParameters(shouldMergeInitProvider bool) (ma
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

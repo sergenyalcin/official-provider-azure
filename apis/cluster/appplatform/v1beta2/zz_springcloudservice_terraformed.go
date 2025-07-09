@@ -21,7 +21,7 @@ func (mg *SpringCloudService) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudService
 func (tr *SpringCloudService) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"config_server_git_setting[*].http_basic_auth[*].password": "configServerGitSetting[*].httpBasicAuth[*].passwordSecretRef", "config_server_git_setting[*].repository[*].http_basic_auth[*].password": "configServerGitSetting[*].repository[*].httpBasicAuth[*].passwordSecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].host_key": "configServerGitSetting[*].repository[*].sshAuth[*].hostKeySecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].private_key": "configServerGitSetting[*].repository[*].sshAuth[*].privateKeySecretRef", "config_server_git_setting[*].ssh_auth[*].host_key": "configServerGitSetting[*].sshAuth[*].hostKeySecretRef", "config_server_git_setting[*].ssh_auth[*].private_key": "configServerGitSetting[*].sshAuth[*].privateKeySecretRef", "container_registry[*].password": "containerRegistry[*].passwordSecretRef"}
+	return map[string]string{"config_server_git_setting[*].http_basic_auth[*].password": "configServerGitSetting.httpBasicAuth.passwordSecretRef", "config_server_git_setting[*].repository[*].http_basic_auth[*].password": "configServerGitSetting.repository[*].httpBasicAuth.passwordSecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].host_key": "configServerGitSetting.repository[*].sshAuth.hostKeySecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].private_key": "configServerGitSetting.repository[*].sshAuth.privateKeySecretRef", "config_server_git_setting[*].ssh_auth[*].host_key": "configServerGitSetting.sshAuth.hostKeySecretRef", "config_server_git_setting[*].ssh_auth[*].private_key": "configServerGitSetting.sshAuth.privateKeySecretRef", "container_registry[*].password": "containerRegistry[*].passwordSecretRef"}
 }
 
 // GetObservation of this SpringCloudService
@@ -84,7 +84,7 @@ func (tr *SpringCloudService) GetInitParameters() (map[string]any, error) {
 func (tr *SpringCloudService) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *SpringCloudService) GetMergedParameters(shouldMergeInitProvider bool) 
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *SpringCloudService) GetMergedParameters(shouldMergeInitProvider bool) 
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

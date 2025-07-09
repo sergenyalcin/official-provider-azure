@@ -33,6 +33,7 @@ func (mg *AccessConnector) ResolveReferences( // ResolveReferences of this Acces
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -65,6 +66,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomParameters.PrivateSubnetName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CustomParameters.PrivateSubnetNameRef,
 				Selector:     mg.Spec.ForProvider.CustomParameters.PrivateSubnetNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -86,6 +88,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomParameters.PublicSubnetName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CustomParameters.PublicSubnetNameRef,
 				Selector:     mg.Spec.ForProvider.CustomParameters.PublicSubnetNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -106,6 +109,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ManagedResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -125,6 +129,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -145,6 +150,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomParameters.PrivateSubnetName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CustomParameters.PrivateSubnetNameRef,
 				Selector:     mg.Spec.InitProvider.CustomParameters.PrivateSubnetNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -166,6 +172,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomParameters.PublicSubnetName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CustomParameters.PublicSubnetNameRef,
 				Selector:     mg.Spec.InitProvider.CustomParameters.PublicSubnetNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -186,6 +193,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ManagedResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -34,6 +34,7 @@ func (mg *LogAnalyticsSolution) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *LogAnalyticsSolution) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *LogAnalyticsSolution) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *LogAnalyticsSolution) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -110,6 +114,7 @@ func (mg *LogAnalyticsSolution) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +134,7 @@ func (mg *LogAnalyticsSolution) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkspaceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},

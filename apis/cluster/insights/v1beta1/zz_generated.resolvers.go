@@ -36,6 +36,7 @@ func (mg *ApplicationInsights) ResolveReferences( // ResolveReferences of this A
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *ApplicationInsights) ResolveReferences( // ResolveReferences of this A
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -74,6 +76,7 @@ func (mg *ApplicationInsights) ResolveReferences( // ResolveReferences of this A
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +108,7 @@ func (mg *ApplicationInsightsAPIKey) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +128,7 @@ func (mg *ApplicationInsightsAPIKey) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -155,6 +160,7 @@ func (mg *ApplicationInsightsAnalyticsItem) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -174,6 +180,7 @@ func (mg *ApplicationInsightsAnalyticsItem) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -205,6 +212,7 @@ func (mg *ApplicationInsightsSmartDetectionRule) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -224,6 +232,7 @@ func (mg *ApplicationInsightsSmartDetectionRule) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -255,6 +264,7 @@ func (mg *ApplicationInsightsStandardWebTest) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -274,6 +284,7 @@ func (mg *ApplicationInsightsStandardWebTest) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -293,6 +304,7 @@ func (mg *ApplicationInsightsStandardWebTest) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -324,6 +336,7 @@ func (mg *ApplicationInsightsWebTest) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.ForProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -343,6 +356,7 @@ func (mg *ApplicationInsightsWebTest) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -362,6 +376,7 @@ func (mg *ApplicationInsightsWebTest) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationInsightsID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApplicationInsightsIDRef,
 			Selector:     mg.Spec.InitProvider.ApplicationInsightsIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -381,6 +396,7 @@ func (mg *ApplicationInsightsWebTest) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -412,6 +428,7 @@ func (mg *ApplicationInsightsWorkbook) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -431,6 +448,7 @@ func (mg *ApplicationInsightsWorkbook) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -462,6 +480,7 @@ func (mg *ApplicationInsightsWorkbookTemplate) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -481,6 +500,7 @@ func (mg *ApplicationInsightsWorkbookTemplate) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -512,6 +532,7 @@ func (mg *MonitorActionGroup) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -545,6 +566,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].ActionGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Action[i3].ActionGroupIDRef,
 				Selector:     mg.Spec.ForProvider.Action[i3].ActionGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -566,6 +588,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Criteria[i3].ResourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Criteria[i3].ResourceIDRef,
 				Selector:     mg.Spec.ForProvider.Criteria[i3].ResourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -586,6 +609,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -605,6 +629,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.ScopesRefs,
 			Selector:      mg.Spec.ForProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -625,6 +650,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Action[i3].ActionGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Action[i3].ActionGroupIDRef,
 				Selector:     mg.Spec.InitProvider.Action[i3].ActionGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -646,6 +672,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Criteria[i3].ResourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Criteria[i3].ResourceIDRef,
 				Selector:     mg.Spec.InitProvider.Criteria[i3].ResourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -666,6 +693,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -685,6 +713,7 @@ func (mg *MonitorActivityLogAlert) ResolveReferences(ctx context.Context, c clie
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ScopesRefs,
 			Selector:      mg.Spec.InitProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -719,6 +748,7 @@ func (mg *MonitorAutoscaleSetting) ResolveReferences(ctx context.Context, c clie
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Profile[i3].Rule[i4].MetricTrigger[i5].MetricResourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Profile[i3].Rule[i4].MetricTrigger[i5].MetricResourceIDRef,
 						Selector:     mg.Spec.ForProvider.Profile[i3].Rule[i4].MetricTrigger[i5].MetricResourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -741,6 +771,7 @@ func (mg *MonitorAutoscaleSetting) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -760,6 +791,7 @@ func (mg *MonitorAutoscaleSetting) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -782,6 +814,7 @@ func (mg *MonitorAutoscaleSetting) ResolveReferences(ctx context.Context, c clie
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Profile[i3].Rule[i4].MetricTrigger[i5].MetricResourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Profile[i3].Rule[i4].MetricTrigger[i5].MetricResourceIDRef,
 						Selector:     mg.Spec.InitProvider.Profile[i3].Rule[i4].MetricTrigger[i5].MetricResourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -804,6 +837,7 @@ func (mg *MonitorAutoscaleSetting) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -823,6 +857,7 @@ func (mg *MonitorAutoscaleSetting) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -854,6 +889,7 @@ func (mg *MonitorDataCollectionEndpoint) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -886,6 +922,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCollectionEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataCollectionEndpointIDRef,
 			Selector:     mg.Spec.ForProvider.DataCollectionEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -907,6 +944,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubIDRef,
 					Selector:     mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -930,6 +968,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceIDRef,
 					Selector:     mg.Spec.ForProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -953,6 +992,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerNameRef,
 					Selector:     mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -976,6 +1016,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountIDRef,
 					Selector:     mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -998,6 +1039,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1018,6 +1060,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1037,6 +1080,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCollectionEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataCollectionEndpointIDRef,
 			Selector:     mg.Spec.InitProvider.DataCollectionEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1058,6 +1102,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Destinations[i3].EventHub[i4].EventHubID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Destinations[i3].EventHub[i4].EventHubIDRef,
 					Selector:     mg.Spec.InitProvider.Destinations[i3].EventHub[i4].EventHubIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1081,6 +1126,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceIDRef,
 					Selector:     mg.Spec.InitProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1104,6 +1150,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Destinations[i3].StorageBlob[i4].ContainerName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Destinations[i3].StorageBlob[i4].ContainerNameRef,
 					Selector:     mg.Spec.InitProvider.Destinations[i3].StorageBlob[i4].ContainerNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1127,6 +1174,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Destinations[i3].StorageBlob[i4].StorageAccountID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Destinations[i3].StorageBlob[i4].StorageAccountIDRef,
 					Selector:     mg.Spec.InitProvider.Destinations[i3].StorageBlob[i4].StorageAccountIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1149,6 +1197,7 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1182,6 +1231,7 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCollectionEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataCollectionEndpointIDRef,
 			Selector:     mg.Spec.ForProvider.DataCollectionEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1201,6 +1251,7 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCollectionRuleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataCollectionRuleIDRef,
 			Selector:     mg.Spec.ForProvider.DataCollectionRuleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1220,6 +1271,7 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1239,6 +1291,7 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCollectionEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataCollectionEndpointIDRef,
 			Selector:     mg.Spec.InitProvider.DataCollectionEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1258,6 +1311,7 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCollectionRuleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataCollectionRuleIDRef,
 			Selector:     mg.Spec.InitProvider.DataCollectionRuleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1289,6 +1343,7 @@ func (mg *MonitorDiagnosticSetting) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1308,6 +1363,7 @@ func (mg *MonitorDiagnosticSetting) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1341,6 +1397,7 @@ func (mg *MonitorMetricAlert) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].ActionGroupID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Action[i3].ActionGroupIDRef,
 				Selector:     mg.Spec.ForProvider.Action[i3].ActionGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1361,6 +1418,7 @@ func (mg *MonitorMetricAlert) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1380,6 +1438,7 @@ func (mg *MonitorMetricAlert) ResolveReferences(ctx context.Context, c client.Re
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.ScopesRefs,
 			Selector:      mg.Spec.ForProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1400,6 +1459,7 @@ func (mg *MonitorMetricAlert) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Action[i3].ActionGroupID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Action[i3].ActionGroupIDRef,
 				Selector:     mg.Spec.InitProvider.Action[i3].ActionGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1420,6 +1480,7 @@ func (mg *MonitorMetricAlert) ResolveReferences(ctx context.Context, c client.Re
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ScopesRefs,
 			Selector:      mg.Spec.InitProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1451,6 +1512,7 @@ func (mg *MonitorPrivateLinkScope) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1482,6 +1544,7 @@ func (mg *MonitorPrivateLinkScopedService) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkedResourceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LinkedResourceIDRef,
 			Selector:     mg.Spec.ForProvider.LinkedResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1501,6 +1564,7 @@ func (mg *MonitorPrivateLinkScopedService) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1520,6 +1584,7 @@ func (mg *MonitorPrivateLinkScopedService) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScopeName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScopeNameRef,
 			Selector:     mg.Spec.ForProvider.ScopeNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1539,6 +1604,7 @@ func (mg *MonitorPrivateLinkScopedService) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedResourceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LinkedResourceIDRef,
 			Selector:     mg.Spec.InitProvider.LinkedResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1572,6 +1638,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Action[i3].ActionGroup),
 				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Action[i3].ActionGroupRefs,
 				Selector:      mg.Spec.ForProvider.Action[i3].ActionGroupSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1592,6 +1659,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AuthorizedResourceIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AuthorizedResourceIdsRefs,
 			Selector:      mg.Spec.ForProvider.AuthorizedResourceIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1611,6 +1679,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataSourceIDRef,
 			Selector:     mg.Spec.ForProvider.DataSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1630,6 +1699,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1650,6 +1720,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Action[i3].ActionGroup),
 				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Action[i3].ActionGroupRefs,
 				Selector:      mg.Spec.InitProvider.Action[i3].ActionGroupSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1670,6 +1741,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AuthorizedResourceIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AuthorizedResourceIdsRefs,
 			Selector:      mg.Spec.InitProvider.AuthorizedResourceIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1689,6 +1761,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataSourceIDRef,
 			Selector:     mg.Spec.InitProvider.DataSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1708,6 +1781,7 @@ func (mg *MonitorScheduledQueryRulesAlert) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1741,6 +1815,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Action[i3].ActionGroups),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Action[i3].ActionGroupsRefs,
 				Selector:      mg.Spec.ForProvider.Action[i3].ActionGroupsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1762,6 +1837,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1782,6 +1858,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1801,6 +1878,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.ScopesRefs,
 			Selector:      mg.Spec.ForProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1821,6 +1899,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Action[i3].ActionGroups),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Action[i3].ActionGroupsRefs,
 				Selector:      mg.Spec.InitProvider.Action[i3].ActionGroupsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1842,6 +1921,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -1862,6 +1942,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ScopesRefs,
 			Selector:      mg.Spec.InitProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1893,6 +1974,7 @@ func (mg *MonitorScheduledQueryRulesLog) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataSourceIDRef,
 			Selector:     mg.Spec.ForProvider.DataSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1912,6 +1994,7 @@ func (mg *MonitorScheduledQueryRulesLog) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1931,6 +2014,7 @@ func (mg *MonitorScheduledQueryRulesLog) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DataSourceIDRef,
 			Selector:     mg.Spec.InitProvider.DataSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1950,6 +2034,7 @@ func (mg *MonitorScheduledQueryRulesLog) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

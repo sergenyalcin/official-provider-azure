@@ -34,6 +34,7 @@ func (mg *CloudApplicationLiveView) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},

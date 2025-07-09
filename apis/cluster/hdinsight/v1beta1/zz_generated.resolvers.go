@@ -38,6 +38,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -59,6 +60,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -80,6 +82,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -103,6 +106,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -126,6 +130,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -148,6 +153,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -170,6 +176,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -193,6 +200,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -216,6 +224,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -239,6 +248,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -261,6 +271,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -296,6 +307,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -317,6 +329,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -338,6 +351,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -361,6 +375,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -384,6 +399,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -406,6 +422,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -428,6 +445,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -451,6 +469,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -474,6 +493,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -497,6 +517,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -519,6 +540,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -554,6 +576,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -575,6 +598,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -596,6 +620,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -619,6 +644,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -642,6 +668,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -664,6 +691,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -686,6 +714,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -709,6 +738,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -732,6 +762,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -755,6 +786,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -777,6 +809,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -812,6 +845,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -833,6 +867,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -854,6 +889,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -877,6 +913,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].KafkaManagementNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].KafkaManagementNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].KafkaManagementNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -900,6 +937,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -923,6 +961,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -945,6 +984,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -967,6 +1007,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -990,6 +1031,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1013,6 +1055,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1036,6 +1079,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1059,6 +1103,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1081,6 +1126,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1116,6 +1162,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1137,6 +1184,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1158,6 +1206,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1181,6 +1230,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1204,6 +1254,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1226,6 +1277,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1248,6 +1300,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1271,6 +1324,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1294,6 +1348,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1317,6 +1372,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1339,6 +1395,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},

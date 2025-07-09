@@ -21,7 +21,7 @@ func (mg *RedisCache) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this RedisCache
 func (tr *RedisCache) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"primary_access_key": "status.atProvider.primaryAccessKey", "primary_connection_string": "status.atProvider.primaryConnectionString", "redis_configuration[*].aof_storage_connection_string_0": "redisConfiguration[*].aofStorageConnectionString0SecretRef", "redis_configuration[*].aof_storage_connection_string_1": "redisConfiguration[*].aofStorageConnectionString1SecretRef", "redis_configuration[*].rdb_storage_connection_string": "redisConfiguration[*].rdbStorageConnectionStringSecretRef", "secondary_access_key": "status.atProvider.secondaryAccessKey", "secondary_connection_string": "status.atProvider.secondaryConnectionString"}
+	return map[string]string{"primary_access_key": "status.atProvider.primaryAccessKey", "primary_connection_string": "status.atProvider.primaryConnectionString", "redis_configuration[*].aof_storage_connection_string_0": "redisConfiguration.aofStorageConnectionString0SecretRef", "redis_configuration[*].aof_storage_connection_string_1": "redisConfiguration.aofStorageConnectionString1SecretRef", "redis_configuration[*].rdb_storage_connection_string": "redisConfiguration.rdbStorageConnectionStringSecretRef", "secondary_access_key": "status.atProvider.secondaryAccessKey", "secondary_connection_string": "status.atProvider.secondaryConnectionString"}
 }
 
 // GetObservation of this RedisCache
@@ -84,7 +84,7 @@ func (tr *RedisCache) GetInitParameters() (map[string]any, error) {
 func (tr *RedisCache) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *RedisCache) GetMergedParameters(shouldMergeInitProvider bool) (map[str
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *RedisCache) GetMergedParameters(shouldMergeInitProvider bool) (map[str
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

@@ -34,6 +34,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConsumerGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConsumerGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ConsumerGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.EnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EventHubNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EventSourceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.EventSourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -110,6 +114,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +134,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SharedAccessKeyName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SharedAccessKeyNameRef,
 			Selector:     mg.Spec.ForProvider.SharedAccessKeyNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -148,6 +154,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConsumerGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConsumerGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ConsumerGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -167,6 +174,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EventHubNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -186,6 +194,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventSourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EventSourceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.EventSourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -205,6 +214,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NamespaceNameRef,
 			Selector:     mg.Spec.InitProvider.NamespaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -224,6 +234,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SharedAccessKeyName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SharedAccessKeyNameRef,
 			Selector:     mg.Spec.InitProvider.SharedAccessKeyNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -255,6 +266,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConsumerGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConsumerGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ConsumerGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -274,6 +286,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.EnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -293,6 +306,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EventSourceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.EventSourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -312,6 +326,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IOTHubNameRef,
 			Selector:     mg.Spec.ForProvider.IOTHubNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -331,6 +346,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConsumerGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConsumerGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ConsumerGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -350,6 +366,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventSourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EventSourceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.EventSourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -369,6 +386,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IOTHubNameRef,
 			Selector:     mg.Spec.InitProvider.IOTHubNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -400,6 +418,7 @@ func (mg *Gen2Environment) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -420,6 +439,7 @@ func (mg *Gen2Environment) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Storage[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Storage[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.Storage[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -441,6 +461,7 @@ func (mg *Gen2Environment) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Storage[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Storage[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.Storage[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -474,6 +495,7 @@ func (mg *ReferenceDataSet) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TimeSeriesInsightsEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TimeSeriesInsightsEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.TimeSeriesInsightsEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -505,6 +527,7 @@ func (mg *StandardEnvironment) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

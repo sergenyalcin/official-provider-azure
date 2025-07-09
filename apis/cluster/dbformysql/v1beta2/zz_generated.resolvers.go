@@ -35,6 +35,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DelegatedSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DelegatedSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateDNSZoneID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrivateDNSZoneIDRef,
 			Selector:     mg.Spec.ForProvider.PrivateDNSZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +95,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegatedSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DelegatedSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DelegatedSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -111,6 +115,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateDNSZoneID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrivateDNSZoneIDRef,
 			Selector:     mg.Spec.InitProvider.PrivateDNSZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +147,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

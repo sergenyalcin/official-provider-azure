@@ -38,6 +38,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -59,6 +60,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -80,6 +82,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -114,6 +117,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
 			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},

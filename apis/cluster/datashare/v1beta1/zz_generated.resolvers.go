@@ -36,6 +36,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -67,6 +68,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerNameRef,
 			Selector:     mg.Spec.ForProvider.ContainerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +88,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataShareID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DataShareIDRef,
 			Selector:     mg.Spec.ForProvider.DataShareIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -106,6 +109,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -127,6 +131,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -147,6 +152,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ContainerNameRef,
 			Selector:     mg.Spec.InitProvider.ContainerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -167,6 +173,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -188,6 +195,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -221,6 +229,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FileSystemNameRef,
 			Selector:     mg.Spec.ForProvider.FileSystemNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -240,6 +249,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ShareIDRef,
 			Selector:     mg.Spec.ForProvider.ShareIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -259,6 +269,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -278,6 +289,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FileSystemNameRef,
 			Selector:     mg.Spec.InitProvider.FileSystemNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -297,6 +309,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -328,6 +341,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KustoClusterID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KustoClusterIDRef,
 			Selector:     mg.Spec.ForProvider.KustoClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -347,6 +361,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ShareIDRef,
 			Selector:     mg.Spec.ForProvider.ShareIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -366,6 +381,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoClusterID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KustoClusterIDRef,
 			Selector:     mg.Spec.InitProvider.KustoClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -397,6 +413,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KustoDatabaseID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KustoDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.KustoDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -416,6 +433,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ShareIDRef,
 			Selector:     mg.Spec.ForProvider.ShareIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -435,6 +453,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoDatabaseID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KustoDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.KustoDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -466,6 +485,7 @@ func (mg *DataShare) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountIDRef,
 			Selector:     mg.Spec.ForProvider.AccountIDSelector,
 			To:           reference.To{List: l, Managed: m},

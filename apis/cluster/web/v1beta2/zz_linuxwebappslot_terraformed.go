@@ -21,7 +21,7 @@ func (mg *LinuxWebAppSlot) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinuxWebAppSlot
 func (tr *LinuxWebAppSlot) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].github[*].client_secret": "authSettings[*].github[*].clientSecretSecretRef", "auth_settings[*].google[*].client_secret": "authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "authSettings[*].twitter[*].consumerSecretSecretRef", "backup[*].storage_account_url": "backup[*].storageAccountUrlSecretRef", "connection_string[*].value": "connectionString[*].valueSecretRef", "custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "logs[*].http_logs[*].azure_blob_storage[*].sas_url": "logs[*].httpLogs[*].azureBlobStorage[*].sasUrlSecretRef", "site_config[*].application_stack[*].docker_registry_password": "siteConfig[*].applicationStack[*].dockerRegistryPasswordSecretRef", "site_credential[*]": "status.atProvider.siteCredential[*]", "storage_account[*].access_key": "storageAccount[*].accessKeySecretRef"}
+	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "authSettings.activeDirectory.clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "authSettings.facebook.appSecretSecretRef", "auth_settings[*].github[*].client_secret": "authSettings.github.clientSecretSecretRef", "auth_settings[*].google[*].client_secret": "authSettings.google.clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "authSettings.microsoft.clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "authSettings.twitter.consumerSecretSecretRef", "backup[*].storage_account_url": "backup.storageAccountUrlSecretRef", "connection_string[*].value": "connectionString[*].valueSecretRef", "custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "logs[*].http_logs[*].azure_blob_storage[*].sas_url": "logs.httpLogs.azureBlobStorage.sasUrlSecretRef", "site_config[*].application_stack[*].docker_registry_password": "siteConfig.applicationStack.dockerRegistryPasswordSecretRef", "site_credential[*]": "status.atProvider.siteCredential[*]", "storage_account[*].access_key": "storageAccount[*].accessKeySecretRef"}
 }
 
 // GetObservation of this LinuxWebAppSlot
@@ -84,7 +84,7 @@ func (tr *LinuxWebAppSlot) GetInitParameters() (map[string]any, error) {
 func (tr *LinuxWebAppSlot) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *LinuxWebAppSlot) GetMergedParameters(shouldMergeInitProvider bool) (ma
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *LinuxWebAppSlot) GetMergedParameters(shouldMergeInitProvider bool) (ma
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

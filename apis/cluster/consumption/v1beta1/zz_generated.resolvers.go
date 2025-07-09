@@ -38,6 +38,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -59,6 +60,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -80,6 +82,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -101,6 +104,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +139,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -157,6 +162,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Notification[i3].ContactGroups),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.ForProvider.Notification[i3].ContactGroupsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -177,6 +183,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -198,6 +205,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values),
 					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -220,6 +228,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.InitProvider.Notification[i3].ContactGroupsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -240,6 +249,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -273,6 +283,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -295,6 +306,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Notification[i3].ContactGroups),
 				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.ForProvider.Notification[i3].ContactGroupsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -317,6 +329,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
 					References:    mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesSelector,
 					To:            reference.To{List: l, Managed: m},
@@ -339,6 +352,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
 				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.InitProvider.Notification[i3].ContactGroupsSelector,
 				To:            reference.To{List: l, Managed: m},

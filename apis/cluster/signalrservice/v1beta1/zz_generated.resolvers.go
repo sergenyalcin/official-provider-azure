@@ -35,6 +35,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.PrivateEndpoint[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SignalrServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SignalrServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +77,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpoint[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.PrivateEndpoint[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -95,6 +98,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SignalrServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SignalrServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -126,6 +130,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -157,6 +162,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SignalrServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SignalrServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -176,6 +182,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -195,6 +202,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SignalrServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SignalrServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -214,6 +222,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -245,6 +254,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -264,6 +274,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -297,6 +308,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef,
 					Selector:     mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -319,6 +331,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventListener[i3].EventHubName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EventListener[i3].EventHubNameRef,
 				Selector:     mg.Spec.ForProvider.EventListener[i3].EventHubNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -340,6 +353,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameRef,
 				Selector:     mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -360,6 +374,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebPubsubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.ForProvider.WebPubsubIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -381,6 +396,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef,
 					Selector:     mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -403,6 +419,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventListener[i3].EventHubName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EventListener[i3].EventHubNameRef,
 				Selector:     mg.Spec.InitProvider.EventListener[i3].EventHubNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -424,6 +441,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceNameRef,
 				Selector:     mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -444,6 +462,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebPubsubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.InitProvider.WebPubsubIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -476,6 +495,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.PrivateEndpoint[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -496,6 +516,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebPubsubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.ForProvider.WebPubsubIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -516,6 +537,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpoint[i3].ID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.PrivateEndpoint[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -536,6 +558,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebPubsubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.InitProvider.WebPubsubIDSelector,
 			To:           reference.To{List: l, Managed: m},

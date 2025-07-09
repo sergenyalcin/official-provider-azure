@@ -34,6 +34,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +86,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +106,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -134,6 +138,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -153,6 +158,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -184,6 +190,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryFabricName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoveryFabricNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryFabricNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -203,6 +210,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryReplicationPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoveryReplicationPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.RecoveryReplicationPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -222,6 +230,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoverySourceProtectionContainerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoverySourceProtectionContainerNameRef,
 			Selector:     mg.Spec.ForProvider.RecoverySourceProtectionContainerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -241,6 +250,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryTargetProtectionContainerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDRef,
 			Selector:     mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -260,6 +270,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -279,6 +290,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -298,6 +310,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RecoveryReplicationPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RecoveryReplicationPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.RecoveryReplicationPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -317,6 +330,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RecoveryTargetProtectionContainerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RecoveryTargetProtectionContainerIDRef,
 			Selector:     mg.Spec.InitProvider.RecoveryTargetProtectionContainerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -348,6 +362,7 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -34,6 +34,7 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +86,7 @@ func (mg *SentinelAlertRuleMSSecurityIncident) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -115,6 +118,7 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -134,6 +138,7 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -165,6 +170,7 @@ func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -184,6 +190,7 @@ func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -215,6 +222,7 @@ func (mg *SentinelDataConnectorIOT) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -246,6 +254,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -265,6 +274,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -284,6 +294,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceName),
 			Extract:      resource.ExtractParamPath("name", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -303,6 +314,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -322,6 +334,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -341,6 +354,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceName),
 			Extract:      resource.ExtractParamPath("name", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -372,6 +386,7 @@ func (mg *SentinelWatchlist) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},

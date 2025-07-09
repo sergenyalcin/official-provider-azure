@@ -35,6 +35,7 @@ func (mg *ManagementGroup) ResolveReferences( // ResolveReferences of this Manag
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParentManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ParentManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ParentManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *ManagementGroup) ResolveReferences( // ResolveReferences of this Manag
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParentManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ParentManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ParentManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +87,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +107,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +127,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +147,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.InitProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},

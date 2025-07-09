@@ -21,7 +21,7 @@ func (mg *VirtualMachineRunCommand) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this VirtualMachineRunCommand
 func (tr *VirtualMachineRunCommand) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"error_blob_managed_identity[*].client_id": "errorBlobManagedIdentity[*].clientIdSecretRef", "error_blob_managed_identity[*].object_id": "errorBlobManagedIdentity[*].objectIdSecretRef", "output_blob_managed_identity[*].client_id": "outputBlobManagedIdentity[*].clientIdSecretRef", "output_blob_managed_identity[*].object_id": "outputBlobManagedIdentity[*].objectIdSecretRef", "protected_parameter[*].name": "protectedParameter[*].nameSecretRef", "protected_parameter[*].value": "protectedParameter[*].valueSecretRef", "run_as_password": "runAsPasswordSecretRef", "source[*].script_uri_managed_identity[*].client_id": "source[*].scriptUriManagedIdentity[*].clientIdSecretRef", "source[*].script_uri_managed_identity[*].object_id": "source[*].scriptUriManagedIdentity[*].objectIdSecretRef"}
+	return map[string]string{"error_blob_managed_identity[*].client_id": "errorBlobManagedIdentity.clientIdSecretRef", "error_blob_managed_identity[*].object_id": "errorBlobManagedIdentity.objectIdSecretRef", "output_blob_managed_identity[*].client_id": "outputBlobManagedIdentity.clientIdSecretRef", "output_blob_managed_identity[*].object_id": "outputBlobManagedIdentity.objectIdSecretRef", "protected_parameter[*].name": "protectedParameter[*].nameSecretRef", "protected_parameter[*].value": "protectedParameter[*].valueSecretRef", "run_as_password": "runAsPasswordSecretRef", "source[*].script_uri_managed_identity[*].client_id": "source.scriptUriManagedIdentity.clientIdSecretRef", "source[*].script_uri_managed_identity[*].object_id": "source.scriptUriManagedIdentity.objectIdSecretRef"}
 }
 
 // GetObservation of this VirtualMachineRunCommand
@@ -84,7 +84,7 @@ func (tr *VirtualMachineRunCommand) GetInitParameters() (map[string]any, error) 
 func (tr *VirtualMachineRunCommand) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *VirtualMachineRunCommand) GetMergedParameters(shouldMergeInitProvider 
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *VirtualMachineRunCommand) GetMergedParameters(shouldMergeInitProvider 
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

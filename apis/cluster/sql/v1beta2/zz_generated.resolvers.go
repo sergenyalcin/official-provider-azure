@@ -38,6 +38,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity.IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Identity.IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity.IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -58,6 +59,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -77,6 +79,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -97,6 +100,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity.IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Identity.IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity.IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -117,6 +121,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -148,6 +153,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -167,6 +173,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServerNameRef,
 			Selector:     mg.Spec.ForProvider.ServerNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -199,6 +206,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Databases),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.DatabasesRefs,
 			Selector:      mg.Spec.ForProvider.DatabasesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -219,6 +227,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PartnerServer[i3].ID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PartnerServer[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.PartnerServer[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -239,6 +248,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -258,6 +268,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Databases),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.DatabasesRefs,
 			Selector:      mg.Spec.InitProvider.DatabasesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -278,6 +289,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerServer[i3].ID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PartnerServer[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.PartnerServer[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -311,6 +323,7 @@ func (mg *MSSQLManagedDatabase) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -342,6 +355,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSZonePartnerID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DNSZonePartnerIDRef,
 			Selector:     mg.Spec.ForProvider.DNSZonePartnerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -361,6 +375,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -380,6 +395,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -399,6 +415,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSZonePartnerID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DNSZonePartnerIDRef,
 			Selector:     mg.Spec.InitProvider.DNSZonePartnerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -418,6 +435,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -449,6 +467,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -468,6 +487,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PartnerManagedInstanceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PartnerManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.PartnerManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -487,6 +507,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -506,6 +527,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerManagedInstanceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PartnerManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.PartnerManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -537,6 +559,7 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -570,6 +593,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AzureadAdministrator.LoginUsername),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AzureadAdministrator.LoginUsernameRef,
 				Selector:     mg.Spec.ForProvider.AzureadAdministrator.LoginUsernameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -591,6 +615,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AzureadAdministrator.ObjectID),
 				Extract:      resource.ExtractParamPath("principal_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AzureadAdministrator.ObjectIDRef,
 				Selector:     mg.Spec.ForProvider.AzureadAdministrator.ObjectIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -612,6 +637,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity.IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Identity.IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity.IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -632,6 +658,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryUserAssignedIdentityID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDRef,
 			Selector:     mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -651,6 +678,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -670,6 +698,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -690,6 +719,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AzureadAdministrator.LoginUsername),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AzureadAdministrator.LoginUsernameRef,
 				Selector:     mg.Spec.InitProvider.AzureadAdministrator.LoginUsernameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -711,6 +741,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AzureadAdministrator.ObjectID),
 				Extract:      resource.ExtractParamPath("principal_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AzureadAdministrator.ObjectIDRef,
 				Selector:     mg.Spec.InitProvider.AzureadAdministrator.ObjectIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -732,6 +763,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity.IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Identity.IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity.IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -752,6 +784,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryUserAssignedIdentityID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrimaryUserAssignedIdentityIDRef,
 			Selector:     mg.Spec.InitProvider.PrimaryUserAssignedIdentityIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -771,6 +804,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -802,6 +836,7 @@ func (mg *MSSQLServerVulnerabilityAssessment) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSecurityAlertPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServerSecurityAlertPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.ServerSecurityAlertPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -821,6 +856,7 @@ func (mg *MSSQLServerVulnerabilityAssessment) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerSecurityAlertPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServerSecurityAlertPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.ServerSecurityAlertPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},

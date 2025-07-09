@@ -38,6 +38,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -59,6 +60,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -80,6 +82,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -114,6 +117,7 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TopicIDRef,
 			Selector:     mg.Spec.ForProvider.TopicIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -145,6 +149,7 @@ func (mg *SubscriptionRule) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},

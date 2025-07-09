@@ -34,6 +34,7 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) ResolveReferences( // Res
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
 			To:           reference.To{List: l, Managed: m},

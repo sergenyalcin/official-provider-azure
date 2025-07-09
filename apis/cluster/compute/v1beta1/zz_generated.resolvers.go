@@ -36,6 +36,7 @@ func (mg *AvailabilitySet) ResolveReferences( // ResolveReferences of this Avail
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -67,6 +68,7 @@ func (mg *CapacityReservation) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CapacityReservationGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CapacityReservationGroupIDRef,
 			Selector:     mg.Spec.ForProvider.CapacityReservationGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -98,6 +100,7 @@ func (mg *CapacityReservationGroup) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +132,7 @@ func (mg *DiskAccess) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -160,6 +164,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -179,6 +184,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -198,6 +204,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -229,6 +236,7 @@ func (mg *GalleryApplication) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GalleryID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GalleryIDRef,
 			Selector:     mg.Spec.ForProvider.GalleryIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -260,6 +268,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GalleryApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GalleryApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.GalleryApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -280,6 +289,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].MediaLink),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Source[i3].MediaLinkRef,
 				Selector:     mg.Spec.ForProvider.Source[i3].MediaLinkSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -301,6 +311,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetRegion[i3].Name),
 				Extract:      resource.ExtractParamPath("location", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.TargetRegion[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.TargetRegion[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -321,6 +332,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GalleryApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GalleryApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.GalleryApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -341,6 +353,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].MediaLink),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Source[i3].MediaLinkRef,
 				Selector:     mg.Spec.InitProvider.Source[i3].MediaLinkSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -362,6 +375,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetRegion[i3].Name),
 				Extract:      resource.ExtractParamPath("location", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.TargetRegion[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.TargetRegion[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -395,6 +409,7 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -427,6 +442,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.ForProvider.NetworkInterfaceIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -446,6 +462,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -465,6 +482,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.InitProvider.NetworkInterfaceIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -498,6 +516,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -519,6 +538,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -540,6 +560,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -574,6 +595,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -593,6 +615,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.SourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -612,6 +635,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.SourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -643,6 +667,7 @@ func (mg *ManagedDiskSASToken) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedDiskID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedDiskIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedDiskIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -662,6 +687,7 @@ func (mg *ManagedDiskSASToken) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedDiskID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedDiskIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedDiskIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -695,6 +721,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -716,6 +743,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -737,6 +765,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -771,6 +800,7 @@ func (mg *ProximityPlacementGroup) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -802,6 +832,7 @@ func (mg *SSHPublicKey) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -833,6 +864,7 @@ func (mg *SharedImage) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GalleryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GalleryNameRef,
 			Selector:     mg.Spec.ForProvider.GalleryNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -852,6 +884,7 @@ func (mg *SharedImage) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -883,6 +916,7 @@ func (mg *SharedImageGallery) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -914,6 +948,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -933,6 +968,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceURI),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceURIRef,
 			Selector:     mg.Spec.ForProvider.SourceURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -952,6 +988,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceURI),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceURIRef,
 			Selector:     mg.Spec.InitProvider.SourceURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -983,6 +1020,7 @@ func (mg *VirtualMachineDataDiskAttachment) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedDiskID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedDiskIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedDiskIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1002,6 +1040,7 @@ func (mg *VirtualMachineDataDiskAttachment) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1021,6 +1060,7 @@ func (mg *VirtualMachineDataDiskAttachment) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedDiskID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedDiskIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedDiskIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1040,6 +1080,7 @@ func (mg *VirtualMachineDataDiskAttachment) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualMachineID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualMachineIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1071,6 +1112,7 @@ func (mg *VirtualMachineExtension) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1102,6 +1144,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorBlobURI),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ErrorBlobURIRef,
 			Selector:     mg.Spec.ForProvider.ErrorBlobURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1121,6 +1164,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputBlobURI),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OutputBlobURIRef,
 			Selector:     mg.Spec.ForProvider.OutputBlobURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1141,6 +1185,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].ScriptURI),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Source[i3].ScriptURIRef,
 				Selector:     mg.Spec.ForProvider.Source[i3].ScriptURISelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1161,6 +1206,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1180,6 +1226,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorBlobURI),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ErrorBlobURIRef,
 			Selector:     mg.Spec.InitProvider.ErrorBlobURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1199,6 +1246,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OutputBlobURI),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OutputBlobURIRef,
 			Selector:     mg.Spec.InitProvider.OutputBlobURISelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1219,6 +1267,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].ScriptURI),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Source[i3].ScriptURIRef,
 				Selector:     mg.Spec.InitProvider.Source[i3].ScriptURISelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1253,6 +1302,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.ForProvider.NetworkInterfaceIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1272,6 +1322,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1291,6 +1342,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.InitProvider.NetworkInterfaceIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -1324,6 +1376,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1345,6 +1398,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1366,6 +1420,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},

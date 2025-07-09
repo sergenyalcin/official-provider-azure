@@ -35,6 +35,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ClusterNameRef,
 			Selector:     mg.Spec.ForProvider.ClusterNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ClusterResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +75,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +95,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -111,6 +115,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ClusterNameRef,
 			Selector:     mg.Spec.InitProvider.ClusterNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,6 +135,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ClusterResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ClusterResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -149,6 +155,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseNameRef,
 			Selector:     mg.Spec.InitProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -168,6 +175,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -199,6 +207,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -219,6 +228,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -240,6 +250,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},

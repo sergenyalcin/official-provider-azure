@@ -34,6 +34,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationAccountName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IntegrationAccountNameRef,
 			Selector:     mg.Spec.ForProvider.IntegrationAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IntegrationAccountName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IntegrationAccountNameRef,
 			Selector:     mg.Spec.InitProvider.IntegrationAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +126,7 @@ func (mg *AppTriggerRecurrence) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogicAppIDRef,
 			Selector:     mg.Spec.ForProvider.LogicAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -153,6 +158,7 @@ func (mg *AppWorkflow) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

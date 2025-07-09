@@ -21,7 +21,7 @@ func (mg *InteractiveQueryCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this InteractiveQueryCluster
 func (tr *InteractiveQueryCluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"extension[*].primary_key": "extension[*].primaryKeySecretRef", "gateway[*].password": "gateway[*].passwordSecretRef", "metastores[*].ambari[*].password": "metastores[*].ambari[*].passwordSecretRef", "metastores[*].hive[*].password": "metastores[*].hive[*].passwordSecretRef", "metastores[*].oozie[*].password": "metastores[*].oozie[*].passwordSecretRef", "monitor[*].primary_key": "monitor[*].primaryKeySecretRef", "roles[*].head_node[*].password": "roles[*].headNode[*].passwordSecretRef", "roles[*].worker_node[*].password": "roles[*].workerNode[*].passwordSecretRef", "roles[*].zookeeper_node[*].password": "roles[*].zookeeperNode[*].passwordSecretRef", "security_profile[*].domain_user_password": "securityProfile[*].domainUserPasswordSecretRef", "storage_account[*].storage_account_key": "storageAccount[*].storageAccountKeySecretRef"}
+	return map[string]string{"extension[*].primary_key": "extension.primaryKeySecretRef", "gateway[*].password": "gateway.passwordSecretRef", "metastores[*].ambari[*].password": "metastores.ambari.passwordSecretRef", "metastores[*].hive[*].password": "metastores.hive.passwordSecretRef", "metastores[*].oozie[*].password": "metastores.oozie.passwordSecretRef", "monitor[*].primary_key": "monitor.primaryKeySecretRef", "roles[*].head_node[*].password": "roles.headNode.passwordSecretRef", "roles[*].worker_node[*].password": "roles.workerNode.passwordSecretRef", "roles[*].zookeeper_node[*].password": "roles.zookeeperNode.passwordSecretRef", "security_profile[*].domain_user_password": "securityProfile.domainUserPasswordSecretRef", "storage_account[*].storage_account_key": "storageAccount[*].storageAccountKeySecretRef"}
 }
 
 // GetObservation of this InteractiveQueryCluster
@@ -84,7 +84,7 @@ func (tr *InteractiveQueryCluster) GetInitParameters() (map[string]any, error) {
 func (tr *InteractiveQueryCluster) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *InteractiveQueryCluster) GetMergedParameters(shouldMergeInitProvider b
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *InteractiveQueryCluster) GetMergedParameters(shouldMergeInitProvider b
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

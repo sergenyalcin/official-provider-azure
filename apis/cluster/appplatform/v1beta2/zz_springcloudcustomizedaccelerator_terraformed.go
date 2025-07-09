@@ -21,7 +21,7 @@ func (mg *SpringCloudCustomizedAccelerator) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudCustomizedAccelerator
 func (tr *SpringCloudCustomizedAccelerator) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"git_repository[*].basic_auth[*].password": "gitRepository[*].basicAuth[*].passwordSecretRef", "git_repository[*].ssh_auth[*].host_key": "gitRepository[*].sshAuth[*].hostKeySecretRef", "git_repository[*].ssh_auth[*].private_key": "gitRepository[*].sshAuth[*].privateKeySecretRef"}
+	return map[string]string{"git_repository[*].basic_auth[*].password": "gitRepository.basicAuth.passwordSecretRef", "git_repository[*].ssh_auth[*].host_key": "gitRepository.sshAuth.hostKeySecretRef", "git_repository[*].ssh_auth[*].private_key": "gitRepository.sshAuth.privateKeySecretRef"}
 }
 
 // GetObservation of this SpringCloudCustomizedAccelerator
@@ -84,7 +84,7 @@ func (tr *SpringCloudCustomizedAccelerator) GetInitParameters() (map[string]any,
 func (tr *SpringCloudCustomizedAccelerator) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *SpringCloudCustomizedAccelerator) GetMergedParameters(shouldMergeInitP
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *SpringCloudCustomizedAccelerator) GetMergedParameters(shouldMergeInitP
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

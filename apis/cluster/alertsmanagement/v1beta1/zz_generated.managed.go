@@ -27,11 +27,6 @@ func (mg *MonitorActionRuleActionGroup) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MonitorActionRuleActionGroup.
-func (mg *MonitorActionRuleActionGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MonitorActionRuleActionGroup.
 func (mg *MonitorActionRuleActionGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *MonitorActionRuleActionGroup) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this MonitorActionRuleActionGroup.
 func (mg *MonitorActionRuleActionGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MonitorActionRuleActionGroup.
-func (mg *MonitorActionRuleActionGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorActionRuleActionGroup.
@@ -87,11 +77,6 @@ func (mg *MonitorActionRuleSuppression) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MonitorActionRuleSuppression.
-func (mg *MonitorActionRuleSuppression) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MonitorActionRuleSuppression.
 func (mg *MonitorActionRuleSuppression) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *MonitorActionRuleSuppression) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this MonitorActionRuleSuppression.
 func (mg *MonitorActionRuleSuppression) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MonitorActionRuleSuppression.
-func (mg *MonitorActionRuleSuppression) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorActionRuleSuppression.
@@ -147,11 +127,6 @@ func (mg *MonitorAlertProcessingRuleActionGroup) GetProviderConfigReference() *x
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleActionGroup.
 func (mg *MonitorAlertProcessingRuleActionGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *MonitorAlertProcessingRuleActionGroup) SetManagementPolicies(r xpv1.Ma
 // SetProviderConfigReference of this MonitorAlertProcessingRuleActionGroup.
 func (mg *MonitorAlertProcessingRuleActionGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleActionGroup.
@@ -207,11 +177,6 @@ func (mg *MonitorAlertProcessingRuleSuppression) GetProviderConfigReference() *x
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleSuppression.
 func (mg *MonitorAlertProcessingRuleSuppression) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *MonitorAlertProcessingRuleSuppression) SetManagementPolicies(r xpv1.Ma
 // SetProviderConfigReference of this MonitorAlertProcessingRuleSuppression.
 func (mg *MonitorAlertProcessingRuleSuppression) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleSuppression.
@@ -267,11 +227,6 @@ func (mg *MonitorSmartDetectorAlertRule) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MonitorSmartDetectorAlertRule.
 func (mg *MonitorSmartDetectorAlertRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *MonitorSmartDetectorAlertRule) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this MonitorSmartDetectorAlertRule.
 func (mg *MonitorSmartDetectorAlertRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorSmartDetectorAlertRule.

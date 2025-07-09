@@ -21,7 +21,7 @@ func (mg *IntegrationRuntimeAzureSSIS) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IntegrationRuntimeAzureSSIS
 func (tr *IntegrationRuntimeAzureSSIS) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"catalog_info[*].administrator_password": "catalogInfo[*].administratorPasswordSecretRef", "custom_setup_script[*].sas_token": "customSetupScript[*].sasTokenSecretRef", "express_custom_setup[*].command_key[*].password": "expressCustomSetup[*].commandKey[*].passwordSecretRef", "express_custom_setup[*].component[*].license": "expressCustomSetup[*].component[*].licenseSecretRef"}
+	return map[string]string{"catalog_info[*].administrator_password": "catalogInfo.administratorPasswordSecretRef", "custom_setup_script[*].sas_token": "customSetupScript.sasTokenSecretRef", "express_custom_setup[*].command_key[*].password": "expressCustomSetup.commandKey[*].passwordSecretRef", "express_custom_setup[*].component[*].license": "expressCustomSetup.component[*].licenseSecretRef"}
 }
 
 // GetObservation of this IntegrationRuntimeAzureSSIS
@@ -84,7 +84,7 @@ func (tr *IntegrationRuntimeAzureSSIS) GetInitParameters() (map[string]any, erro
 func (tr *IntegrationRuntimeAzureSSIS) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *IntegrationRuntimeAzureSSIS) GetMergedParameters(shouldMergeInitProvid
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *IntegrationRuntimeAzureSSIS) GetMergedParameters(shouldMergeInitProvid
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

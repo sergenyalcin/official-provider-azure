@@ -36,6 +36,7 @@ func (mg *MonitorActionRuleActionGroup) ResolveReferences( // ResolveReferences 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActionGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ActionGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ActionGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +56,7 @@ func (mg *MonitorActionRuleActionGroup) ResolveReferences( // ResolveReferences 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +77,7 @@ func (mg *MonitorActionRuleActionGroup) ResolveReferences( // ResolveReferences 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scope[i3].ResourceIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Scope[i3].ResourceIdsRefs,
 				Selector:      mg.Spec.ForProvider.Scope[i3].ResourceIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -95,6 +98,7 @@ func (mg *MonitorActionRuleActionGroup) ResolveReferences( // ResolveReferences 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ActionGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ActionGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ActionGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -115,6 +119,7 @@ func (mg *MonitorActionRuleActionGroup) ResolveReferences( // ResolveReferences 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scope[i3].ResourceIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Scope[i3].ResourceIdsRefs,
 				Selector:      mg.Spec.InitProvider.Scope[i3].ResourceIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -149,6 +154,7 @@ func (mg *MonitorActionRuleSuppression) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -169,6 +175,7 @@ func (mg *MonitorActionRuleSuppression) ResolveReferences(ctx context.Context, c
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scope[i3].ResourceIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Scope[i3].ResourceIdsRefs,
 				Selector:      mg.Spec.ForProvider.Scope[i3].ResourceIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -190,6 +197,7 @@ func (mg *MonitorActionRuleSuppression) ResolveReferences(ctx context.Context, c
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scope[i3].ResourceIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Scope[i3].ResourceIdsRefs,
 				Selector:      mg.Spec.InitProvider.Scope[i3].ResourceIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -224,6 +232,7 @@ func (mg *MonitorAlertProcessingRuleActionGroup) ResolveReferences(ctx context.C
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AddActionGroupIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.AddActionGroupIdsRefs,
 			Selector:      mg.Spec.ForProvider.AddActionGroupIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -243,6 +252,7 @@ func (mg *MonitorAlertProcessingRuleActionGroup) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -262,6 +272,7 @@ func (mg *MonitorAlertProcessingRuleActionGroup) ResolveReferences(ctx context.C
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.ScopesRefs,
 			Selector:      mg.Spec.ForProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -281,6 +292,7 @@ func (mg *MonitorAlertProcessingRuleActionGroup) ResolveReferences(ctx context.C
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AddActionGroupIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.AddActionGroupIdsRefs,
 			Selector:      mg.Spec.InitProvider.AddActionGroupIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -300,6 +312,7 @@ func (mg *MonitorAlertProcessingRuleActionGroup) ResolveReferences(ctx context.C
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ScopesRefs,
 			Selector:      mg.Spec.InitProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -332,6 +345,7 @@ func (mg *MonitorAlertProcessingRuleSuppression) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -351,6 +365,7 @@ func (mg *MonitorAlertProcessingRuleSuppression) ResolveReferences(ctx context.C
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.ScopesRefs,
 			Selector:      mg.Spec.ForProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -370,6 +385,7 @@ func (mg *MonitorAlertProcessingRuleSuppression) ResolveReferences(ctx context.C
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ScopesRefs,
 			Selector:      mg.Spec.InitProvider.ScopesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -403,6 +419,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ActionGroup[i3].Ids),
 				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.ActionGroup[i3].IdsRefs,
 				Selector:      mg.Spec.ForProvider.ActionGroup[i3].IdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -423,6 +440,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -442,6 +460,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ScopeResourceIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.ScopeResourceIdsRefs,
 			Selector:      mg.Spec.ForProvider.ScopeResourceIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -462,6 +481,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ActionGroup[i3].Ids),
 				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.ActionGroup[i3].IdsRefs,
 				Selector:      mg.Spec.InitProvider.ActionGroup[i3].IdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -482,6 +502,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -501,6 +522,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ScopeResourceIds),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ScopeResourceIdsRefs,
 			Selector:      mg.Spec.InitProvider.ScopeResourceIdsSelector,
 			To:            reference.To{List: l, Managed: m},

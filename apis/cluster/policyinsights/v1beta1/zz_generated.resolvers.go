@@ -34,6 +34,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +126,7 @@ func (mg *SubscriptionPolicyRemediation) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,6 +146,7 @@ func (mg *SubscriptionPolicyRemediation) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
 			To:           reference.To{List: l, Managed: m},

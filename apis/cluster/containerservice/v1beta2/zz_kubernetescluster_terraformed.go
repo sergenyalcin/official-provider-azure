@@ -21,7 +21,7 @@ func (mg *KubernetesCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this KubernetesCluster
 func (tr *KubernetesCluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"azure_active_directory_role_based_access_control[*].server_app_secret": "azureActiveDirectoryRoleBasedAccessControl[*].serverAppSecretSecretRef", "http_proxy_config[*].trusted_ca": "httpProxyConfig[*].trustedCaSecretRef", "kube_admin_config[*]": "status.atProvider.kubeAdminConfig[*]", "kube_admin_config[*].client_certificate": "status.atProvider.kubeAdminConfig[*].clientCertificate", "kube_admin_config[*].client_key": "status.atProvider.kubeAdminConfig[*].clientKey", "kube_admin_config[*].cluster_ca_certificate": "status.atProvider.kubeAdminConfig[*].clusterCaCertificate", "kube_admin_config[*].password": "status.atProvider.kubeAdminConfig[*].password", "kube_admin_config_raw": "status.atProvider.kubeAdminConfigRaw", "kube_config[*]": "status.atProvider.kubeConfig[*]", "kube_config[*].client_certificate": "status.atProvider.kubeConfig[*].clientCertificate", "kube_config[*].client_key": "status.atProvider.kubeConfig[*].clientKey", "kube_config[*].cluster_ca_certificate": "status.atProvider.kubeConfig[*].clusterCaCertificate", "kube_config[*].password": "status.atProvider.kubeConfig[*].password", "kube_config_raw": "status.atProvider.kubeConfigRaw", "service_principal[*].client_secret": "servicePrincipal[*].clientSecretSecretRef", "windows_profile[*].admin_password": "windowsProfile[*].adminPasswordSecretRef"}
+	return map[string]string{"azure_active_directory_role_based_access_control[*].server_app_secret": "azureActiveDirectoryRoleBasedAccessControl.serverAppSecretSecretRef", "http_proxy_config[*].trusted_ca": "httpProxyConfig.trustedCaSecretRef", "kube_admin_config[*]": "status.atProvider.kubeAdminConfig[*]", "kube_admin_config[*].client_certificate": "status.atProvider.kubeAdminConfig[*].clientCertificate", "kube_admin_config[*].client_key": "status.atProvider.kubeAdminConfig[*].clientKey", "kube_admin_config[*].cluster_ca_certificate": "status.atProvider.kubeAdminConfig[*].clusterCaCertificate", "kube_admin_config[*].password": "status.atProvider.kubeAdminConfig[*].password", "kube_admin_config_raw": "status.atProvider.kubeAdminConfigRaw", "kube_config[*]": "status.atProvider.kubeConfig[*]", "kube_config[*].client_certificate": "status.atProvider.kubeConfig[*].clientCertificate", "kube_config[*].client_key": "status.atProvider.kubeConfig[*].clientKey", "kube_config[*].cluster_ca_certificate": "status.atProvider.kubeConfig[*].clusterCaCertificate", "kube_config[*].password": "status.atProvider.kubeConfig[*].password", "kube_config_raw": "status.atProvider.kubeConfigRaw", "service_principal[*].client_secret": "servicePrincipal.clientSecretSecretRef", "windows_profile[*].admin_password": "windowsProfile.adminPasswordSecretRef"}
 }
 
 // GetObservation of this KubernetesCluster
@@ -84,7 +84,7 @@ func (tr *KubernetesCluster) GetInitParameters() (map[string]any, error) {
 func (tr *KubernetesCluster) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *KubernetesCluster) GetMergedParameters(shouldMergeInitProvider bool) (
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *KubernetesCluster) GetMergedParameters(shouldMergeInitProvider bool) (
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

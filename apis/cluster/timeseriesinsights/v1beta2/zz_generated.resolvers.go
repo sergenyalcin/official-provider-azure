@@ -33,6 +33,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Storage.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Storage.NameRef,
 				Selector:     mg.Spec.ForProvider.Storage.NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -74,6 +76,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Storage.Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Storage.NameRef,
 				Selector:     mg.Spec.InitProvider.Storage.NameSelector,
 				To:           reference.To{List: l, Managed: m},

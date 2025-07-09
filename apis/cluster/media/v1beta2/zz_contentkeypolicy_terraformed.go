@@ -21,7 +21,7 @@ func (mg *ContentKeyPolicy) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ContentKeyPolicy
 func (tr *ContentKeyPolicy) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"policy_option[*].fairplay_configuration[*].ask": "policyOption[*].fairplayConfiguration[*].askSecretRef", "policy_option[*].fairplay_configuration[*].pfx": "policyOption[*].fairplayConfiguration[*].pfxSecretRef", "policy_option[*].fairplay_configuration[*].pfx_password": "policyOption[*].fairplayConfiguration[*].pfxPasswordSecretRef", "policy_option[*].playready_configuration_license[*].grace_period": "policyOption[*].playreadyConfigurationLicense[*].gracePeriodSecretRef", "policy_option[*].token_restriction[*].alternate_key[*].rsa_token_key_exponent": "policyOption[*].tokenRestriction[*].alternateKey[*].rsaTokenKeyExponentSecretRef", "policy_option[*].token_restriction[*].alternate_key[*].rsa_token_key_modulus": "policyOption[*].tokenRestriction[*].alternateKey[*].rsaTokenKeyModulusSecretRef", "policy_option[*].token_restriction[*].alternate_key[*].symmetric_token_key": "policyOption[*].tokenRestriction[*].alternateKey[*].symmetricTokenKeySecretRef", "policy_option[*].token_restriction[*].alternate_key[*].x509_token_key_raw": "policyOption[*].tokenRestriction[*].alternateKey[*].x509TokenKeyRawSecretRef", "policy_option[*].token_restriction[*].primary_rsa_token_key_exponent": "policyOption[*].tokenRestriction[*].primaryRsaTokenKeyExponentSecretRef", "policy_option[*].token_restriction[*].primary_rsa_token_key_modulus": "policyOption[*].tokenRestriction[*].primaryRsaTokenKeyModulusSecretRef", "policy_option[*].token_restriction[*].primary_symmetric_token_key": "policyOption[*].tokenRestriction[*].primarySymmetricTokenKeySecretRef", "policy_option[*].token_restriction[*].primary_x509_token_key_raw": "policyOption[*].tokenRestriction[*].primaryX509TokenKeyRawSecretRef"}
+	return map[string]string{"policy_option[*].fairplay_configuration[*].ask": "policyOption[*].fairplayConfiguration.askSecretRef", "policy_option[*].fairplay_configuration[*].pfx": "policyOption[*].fairplayConfiguration.pfxSecretRef", "policy_option[*].fairplay_configuration[*].pfx_password": "policyOption[*].fairplayConfiguration.pfxPasswordSecretRef", "policy_option[*].playready_configuration_license[*].grace_period": "policyOption[*].playreadyConfigurationLicense[*].gracePeriodSecretRef", "policy_option[*].token_restriction[*].alternate_key[*].rsa_token_key_exponent": "policyOption[*].tokenRestriction.alternateKey[*].rsaTokenKeyExponentSecretRef", "policy_option[*].token_restriction[*].alternate_key[*].rsa_token_key_modulus": "policyOption[*].tokenRestriction.alternateKey[*].rsaTokenKeyModulusSecretRef", "policy_option[*].token_restriction[*].alternate_key[*].symmetric_token_key": "policyOption[*].tokenRestriction.alternateKey[*].symmetricTokenKeySecretRef", "policy_option[*].token_restriction[*].alternate_key[*].x509_token_key_raw": "policyOption[*].tokenRestriction.alternateKey[*].x509TokenKeyRawSecretRef", "policy_option[*].token_restriction[*].primary_rsa_token_key_exponent": "policyOption[*].tokenRestriction.primaryRsaTokenKeyExponentSecretRef", "policy_option[*].token_restriction[*].primary_rsa_token_key_modulus": "policyOption[*].tokenRestriction.primaryRsaTokenKeyModulusSecretRef", "policy_option[*].token_restriction[*].primary_symmetric_token_key": "policyOption[*].tokenRestriction.primarySymmetricTokenKeySecretRef", "policy_option[*].token_restriction[*].primary_x509_token_key_raw": "policyOption[*].tokenRestriction.primaryX509TokenKeyRawSecretRef"}
 }
 
 // GetObservation of this ContentKeyPolicy
@@ -84,7 +84,7 @@ func (tr *ContentKeyPolicy) GetInitParameters() (map[string]any, error) {
 func (tr *ContentKeyPolicy) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *ContentKeyPolicy) GetMergedParameters(shouldMergeInitProvider bool) (m
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *ContentKeyPolicy) GetMergedParameters(shouldMergeInitProvider bool) (m
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

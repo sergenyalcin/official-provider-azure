@@ -35,6 +35,7 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileNameRef,
 			Selector:     mg.Spec.ForProvider.ProfileNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +87,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +107,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSZoneID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DNSZoneIDRef,
 			Selector:     mg.Spec.ForProvider.DNSZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +127,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSZoneID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DNSZoneIDRef,
 			Selector:     mg.Spec.InitProvider.DNSZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +159,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorOriginGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -173,6 +179,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HostName),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.HostNameRef,
 			Selector:     mg.Spec.ForProvider.HostNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -192,6 +199,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OriginHostHeader),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OriginHostHeaderRef,
 			Selector:     mg.Spec.ForProvider.OriginHostHeaderSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -212,6 +220,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLink.Location),
 				Extract:      resource.ExtractParamPath("location", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PrivateLink.LocationRef,
 				Selector:     mg.Spec.ForProvider.PrivateLink.LocationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -233,6 +242,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetIDRef,
 				Selector:     mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -253,6 +263,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HostName),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.HostNameRef,
 			Selector:     mg.Spec.InitProvider.HostNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -272,6 +283,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OriginHostHeader),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OriginHostHeaderRef,
 			Selector:     mg.Spec.InitProvider.OriginHostHeaderSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -292,6 +304,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLink.Location),
 				Extract:      resource.ExtractParamPath("location", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PrivateLink.LocationRef,
 				Selector:     mg.Spec.InitProvider.PrivateLink.LocationSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -313,6 +326,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetIDRef,
 				Selector:     mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -346,6 +360,7 @@ func (mg *FrontdoorOriginGroup) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -378,6 +393,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorCustomDomainIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CdnFrontdoorCustomDomainIdsRefs,
 			Selector:      mg.Spec.ForProvider.CdnFrontdoorCustomDomainIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -397,6 +413,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorEndpointIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -416,6 +433,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorOriginGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -435,6 +453,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorOriginIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CdnFrontdoorOriginIdsRefs,
 			Selector:      mg.Spec.ForProvider.CdnFrontdoorOriginIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -454,6 +473,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorRuleSetIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.CdnFrontdoorRuleSetIdsRefs,
 			Selector:      mg.Spec.ForProvider.CdnFrontdoorRuleSetIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -473,6 +493,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorCustomDomainIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CdnFrontdoorCustomDomainIdsRefs,
 			Selector:      mg.Spec.InitProvider.CdnFrontdoorCustomDomainIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -492,6 +513,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CdnFrontdoorOriginGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CdnFrontdoorOriginGroupIDRef,
 			Selector:     mg.Spec.InitProvider.CdnFrontdoorOriginGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -511,6 +533,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorOriginIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CdnFrontdoorOriginIdsRefs,
 			Selector:      mg.Spec.InitProvider.CdnFrontdoorOriginIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -530,6 +553,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorRuleSetIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.CdnFrontdoorRuleSetIdsRefs,
 			Selector:      mg.Spec.InitProvider.CdnFrontdoorRuleSetIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -563,6 +587,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDRef,
 					Selector:     mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -584,6 +609,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorRuleSetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorRuleSetIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorRuleSetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -605,6 +631,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDRef,
 					Selector:     mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -639,6 +666,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -662,6 +690,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDRef,
 							Selector:     mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -687,6 +716,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDRef,
 					Selector:     mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -712,6 +742,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDRef,
 							Selector:     mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -737,6 +768,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDRef,
 					Selector:     mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDSelector,
 					To:           reference.To{List: l, Managed: m},

@@ -34,6 +34,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +54,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +74,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SpringCloudIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +94,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},

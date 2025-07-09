@@ -21,7 +21,7 @@ func (mg *Management) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Management
 func (tr *Management) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"certificate[*].certificate_password": "certificate[*].certificatePasswordSecretRef", "certificate[*].encoded_certificate": "certificate[*].encodedCertificateSecretRef", "delegation[*].validation_key": "delegation[*].validationKeySecretRef", "hostname_configuration[*].developer_portal[*].certificate": "status.atProvider.hostnameConfiguration[*].developerPortal[*].certificate", "hostname_configuration[*].developer_portal[*].certificate_password": "status.atProvider.hostnameConfiguration[*].developerPortal[*].certificatePassword", "hostname_configuration[*].management[*].certificate": "status.atProvider.hostnameConfiguration[*].management[*].certificate", "hostname_configuration[*].management[*].certificate_password": "status.atProvider.hostnameConfiguration[*].management[*].certificatePassword", "hostname_configuration[*].portal[*].certificate": "status.atProvider.hostnameConfiguration[*].portal[*].certificate", "hostname_configuration[*].portal[*].certificate_password": "status.atProvider.hostnameConfiguration[*].portal[*].certificatePassword", "hostname_configuration[*].proxy[*].certificate": "status.atProvider.hostnameConfiguration[*].proxy[*].certificate", "hostname_configuration[*].proxy[*].certificate_password": "status.atProvider.hostnameConfiguration[*].proxy[*].certificatePassword", "hostname_configuration[*].scm[*].certificate": "status.atProvider.hostnameConfiguration[*].scm[*].certificate", "hostname_configuration[*].scm[*].certificate_password": "status.atProvider.hostnameConfiguration[*].scm[*].certificatePassword", "tenant_access[*].primary_key": "status.atProvider.tenantAccess[*].primaryKey", "tenant_access[*].secondary_key": "status.atProvider.tenantAccess[*].secondaryKey"}
+	return map[string]string{"certificate[*].certificate_password": "certificate[*].certificatePasswordSecretRef", "certificate[*].encoded_certificate": "certificate[*].encodedCertificateSecretRef", "delegation[*].validation_key": "delegation.validationKeySecretRef", "hostname_configuration[*].developer_portal[*].certificate": "status.atProvider.hostnameConfiguration.developerPortal[*].certificate", "hostname_configuration[*].developer_portal[*].certificate_password": "status.atProvider.hostnameConfiguration.developerPortal[*].certificatePassword", "hostname_configuration[*].management[*].certificate": "status.atProvider.hostnameConfiguration.management[*].certificate", "hostname_configuration[*].management[*].certificate_password": "status.atProvider.hostnameConfiguration.management[*].certificatePassword", "hostname_configuration[*].portal[*].certificate": "status.atProvider.hostnameConfiguration.portal[*].certificate", "hostname_configuration[*].portal[*].certificate_password": "status.atProvider.hostnameConfiguration.portal[*].certificatePassword", "hostname_configuration[*].proxy[*].certificate": "status.atProvider.hostnameConfiguration.proxy[*].certificate", "hostname_configuration[*].proxy[*].certificate_password": "status.atProvider.hostnameConfiguration.proxy[*].certificatePassword", "hostname_configuration[*].scm[*].certificate": "status.atProvider.hostnameConfiguration.scm[*].certificate", "hostname_configuration[*].scm[*].certificate_password": "status.atProvider.hostnameConfiguration.scm[*].certificatePassword", "tenant_access[*].primary_key": "status.atProvider.tenantAccess.primaryKey", "tenant_access[*].secondary_key": "status.atProvider.tenantAccess.secondaryKey"}
 }
 
 // GetObservation of this Management
@@ -84,7 +84,7 @@ func (tr *Management) GetInitParameters() (map[string]any, error) {
 func (tr *Management) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 	if !shouldMergeInitProvider {
 		return params, nil
@@ -92,7 +92,7 @@ func (tr *Management) GetMergedParameters(shouldMergeInitProvider bool) (map[str
 
 	initParams, err := tr.GetInitParameters()
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
@@ -104,7 +104,7 @@ func (tr *Management) GetMergedParameters(shouldMergeInitProvider bool) (map[str
 		c.Overwrite = false
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
 	}
 
 	return params, nil

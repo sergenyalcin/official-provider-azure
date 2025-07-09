@@ -37,6 +37,7 @@ func (mg *Asset) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -56,6 +57,7 @@ func (mg *Asset) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -87,6 +89,7 @@ func (mg *AssetFilter) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AssetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AssetIDRef,
 			Selector:     mg.Spec.ForProvider.AssetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -118,6 +121,7 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -137,6 +141,7 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -169,6 +174,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputAsset[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.InputAsset[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.InputAsset[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -189,6 +195,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -209,6 +216,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputAsset[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OutputAsset[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.OutputAsset[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -229,6 +237,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -248,6 +257,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransformName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TransformNameRef,
 			Selector:     mg.Spec.ForProvider.TransformNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -268,6 +278,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputAsset[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.InputAsset[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.InputAsset[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -289,6 +300,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OutputAsset[i3].Name),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OutputAsset[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.OutputAsset[i3].NameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -322,6 +334,7 @@ func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -341,6 +354,7 @@ func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -372,6 +386,7 @@ func (mg *LiveEventOutput) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AssetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AssetNameRef,
 			Selector:     mg.Spec.ForProvider.AssetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -391,6 +406,7 @@ func (mg *LiveEventOutput) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LiveEventID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LiveEventIDRef,
 			Selector:     mg.Spec.ForProvider.LiveEventIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -410,6 +426,7 @@ func (mg *LiveEventOutput) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AssetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AssetNameRef,
 			Selector:     mg.Spec.InitProvider.AssetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -441,6 +458,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -461,6 +479,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].ID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -482,6 +501,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].ID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].IDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -515,6 +535,7 @@ func (mg *ServicesAccountFilter) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -534,6 +555,7 @@ func (mg *ServicesAccountFilter) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -565,6 +587,7 @@ func (mg *StreamingEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -584,6 +607,7 @@ func (mg *StreamingEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -616,6 +640,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AssetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AssetNameRef,
 			Selector:     mg.Spec.ForProvider.AssetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -635,6 +660,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.FilterNames),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.FilterNamesRefs,
 			Selector:      mg.Spec.ForProvider.FilterNamesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -654,6 +680,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -673,6 +700,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -692,6 +720,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AssetName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AssetNameRef,
 			Selector:     mg.Spec.InitProvider.AssetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -711,6 +740,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.FilterNames),
 			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.FilterNamesRefs,
 			Selector:      mg.Spec.InitProvider.FilterNamesSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -744,6 +774,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameRef,
 					Selector:     mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -765,6 +796,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -784,6 +816,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -805,6 +838,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameRef,
 					Selector:     mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -839,6 +873,7 @@ func (mg *Transform) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -858,6 +893,7 @@ func (mg *Transform) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},

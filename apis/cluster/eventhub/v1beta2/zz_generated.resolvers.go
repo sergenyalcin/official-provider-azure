@@ -35,6 +35,7 @@ func (mg *EventHub) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +55,7 @@ func (mg *EventHub) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -87,6 +89,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -108,6 +111,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +133,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},

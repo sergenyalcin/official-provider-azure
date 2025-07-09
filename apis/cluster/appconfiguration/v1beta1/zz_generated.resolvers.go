@@ -36,6 +36,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption[i3].IdentityClientID),
 				Extract:      resource.ExtractParamPath("client_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Encryption[i3].IdentityClientIDRef,
 				Selector:     mg.Spec.ForProvider.Encryption[i3].IdentityClientIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +58,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifier),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifierRef,
 				Selector:     mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -78,6 +80,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
@@ -98,6 +101,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -118,6 +122,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].IdentityClientID),
 				Extract:      resource.ExtractParamPath("client_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef,
 				Selector:     mg.Spec.InitProvider.Encryption[i3].IdentityClientIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -139,6 +144,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierRef,
 				Selector:     mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -160,6 +166,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
 				To:            reference.To{List: l, Managed: m},
