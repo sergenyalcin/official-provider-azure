@@ -22,7 +22,7 @@ func Setup_loadtestservice(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: loadtestserviceCrdGroup, Kind: "LoadTest"}: loadtest.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, loadtestserviceCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

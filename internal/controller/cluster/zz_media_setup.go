@@ -44,7 +44,7 @@ func Setup_media(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: mediaCrdGroup, Kind: "StreamingPolicy"}:       streamingpolicy.Setup,
 		schema.GroupKind{Group: mediaCrdGroup, Kind: "Transform"}:             transform.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, mediaCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

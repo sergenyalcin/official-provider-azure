@@ -34,7 +34,7 @@ func Setup_containerregistry(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: containerregistryCrdGroup, Kind: "TokenPassword"}:              tokenpassword.Setup,
 		schema.GroupKind{Group: containerregistryCrdGroup, Kind: "Webhook"}:                    webhook.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, containerregistryCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

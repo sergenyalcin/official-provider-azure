@@ -22,7 +22,7 @@ func Setup_healthbot(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: healthbotCrdGroup, Kind: "HealthBot"}: healthbot.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, healthbotCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

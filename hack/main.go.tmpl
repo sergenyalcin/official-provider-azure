@@ -23,6 +23,7 @@ import (
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	"github.com/crossplane/upjet/pkg/controller/conversion"
 	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/cache"
@@ -31,7 +32,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
 	clusterapis "github.com/upbound/provider-azure/apis/cluster"
-	namespacedapis"github.com/upbound/provider-azure/apis/namespaced"
+	namespacedapis "github.com/upbound/provider-azure/apis/namespaced"
 	clusterconfig "github.com/upbound/provider-azure/config/cluster"
 	namespacedconfig "github.com/upbound/provider-azure/config/namespaced"
 	resolverapis "github.com/upbound/provider-azure/internal/apis"
@@ -146,6 +147,7 @@ func main() {
 	kingpin.FatalIfError(resolverapis.BuildScheme(clusterapis.AddToSchemes), "Cannot register the cluster-scoped Azure APIs with the API resolver's runtime scheme")
 	kingpin.FatalIfError(namespacedapis.AddToScheme(mgr.GetScheme()), "Cannot add namespace-scoped Azure APIs to scheme")
 	kingpin.FatalIfError(resolverapis.BuildScheme(namespacedapis.AddToSchemes), "Cannot register the namespace-scoped Azure APIs with the API resolver's runtime scheme")
+	kingpin.FatalIfError(apiextensionsv1.AddToScheme(mgr.GetScheme()), "Cannot add apiextensionsv1 APIs to scheme")
 
 	metricRecorder := managed.NewMRMetricRecorder()
 	stateMetrics := statemetrics.NewMRStateMetrics()

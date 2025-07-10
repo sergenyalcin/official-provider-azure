@@ -48,7 +48,7 @@ func Setup_devices(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubRoute"}:                    iothubroute.Setup,
 		schema.GroupKind{Group: devicesCrdGroup, Kind: "IOTHubSharedAccessPolicy"}:       iothubsharedaccesspolicy.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, devicesCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

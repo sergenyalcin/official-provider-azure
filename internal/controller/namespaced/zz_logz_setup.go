@@ -28,7 +28,7 @@ func Setup_logz(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: logzCrdGroup, Kind: "SubAccountTagRule"}: subaccounttagrule.Setup,
 		schema.GroupKind{Group: logzCrdGroup, Kind: "TagRule"}:           tagrule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, logzCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

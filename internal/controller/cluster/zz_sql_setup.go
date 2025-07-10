@@ -64,7 +64,7 @@ func Setup_sql(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLServerVulnerabilityAssessment"}:               mssqlservervulnerabilityassessment.Setup,
 		schema.GroupKind{Group: sqlCrdGroup, Kind: "MSSQLVirtualNetworkRule"}:                          mssqlvirtualnetworkrule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, sqlCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

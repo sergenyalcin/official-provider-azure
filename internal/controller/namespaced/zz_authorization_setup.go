@@ -52,7 +52,7 @@ func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: authorizationCrdGroup, Kind: "SubscriptionPolicyExemption"}:     subscriptionpolicyexemption.Setup,
 		schema.GroupKind{Group: authorizationCrdGroup, Kind: "TrustedAccessRoleBinding"}:        trustedaccessrolebinding.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, authorizationCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

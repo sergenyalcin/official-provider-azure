@@ -30,7 +30,7 @@ func Setup_netapp(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: netappCrdGroup, Kind: "SnapshotPolicy"}: snapshotpolicy.Setup,
 		schema.GroupKind{Group: netappCrdGroup, Kind: "Volume"}:         volume.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, netappCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

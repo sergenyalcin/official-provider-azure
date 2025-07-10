@@ -24,7 +24,7 @@ func Setup_search(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: searchCrdGroup, Kind: "Service"}:                  service.Setup,
 		schema.GroupKind{Group: searchCrdGroup, Kind: "SharedPrivateLinkService"}: sharedprivatelinkservice.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, searchCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -38,7 +38,7 @@ func Setup_operationalinsights(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: operationalinsightsCrdGroup, Kind: "LogAnalyticsSavedSearch"}:                         loganalyticssavedsearch.Setup,
 		schema.GroupKind{Group: operationalinsightsCrdGroup, Kind: "Workspace"}:                                       workspace.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, operationalinsightsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

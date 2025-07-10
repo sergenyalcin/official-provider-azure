@@ -24,7 +24,7 @@ func Setup_management(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: managementCrdGroup, Kind: "ManagementGroup"}:                        managementgroup.Setup,
 		schema.GroupKind{Group: managementCrdGroup, Kind: "ManagementGroupSubscriptionAssociation"}: managementgroupsubscriptionassociation.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, managementCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

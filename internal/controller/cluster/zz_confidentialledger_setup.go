@@ -22,7 +22,7 @@ func Setup_confidentialledger(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: confidentialledgerCrdGroup, Kind: "Ledger"}: ledger.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, confidentialledgerCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

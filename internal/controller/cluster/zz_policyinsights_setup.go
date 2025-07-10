@@ -24,7 +24,7 @@ func Setup_policyinsights(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: policyinsightsCrdGroup, Kind: "ResourcePolicyRemediation"}:     resourcepolicyremediation.Setup,
 		schema.GroupKind{Group: policyinsightsCrdGroup, Kind: "SubscriptionPolicyRemediation"}: subscriptionpolicyremediation.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, policyinsightsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

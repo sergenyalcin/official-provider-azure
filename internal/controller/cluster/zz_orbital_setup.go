@@ -24,7 +24,7 @@ func Setup_orbital(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: orbitalCrdGroup, Kind: "ContactProfile"}: contactprofile.Setup,
 		schema.GroupKind{Group: orbitalCrdGroup, Kind: "Spacecraft"}:     spacecraft.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, orbitalCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

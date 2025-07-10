@@ -22,7 +22,7 @@ func Setup_attestation(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: attestationCrdGroup, Kind: "Provider"}: provider.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, attestationCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -26,7 +26,7 @@ func Setup_consumption(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: consumptionCrdGroup, Kind: "BudgetResourceGroup"}:   budgetresourcegroup.Setup,
 		schema.GroupKind{Group: consumptionCrdGroup, Kind: "BudgetSubscription"}:    budgetsubscription.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, consumptionCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

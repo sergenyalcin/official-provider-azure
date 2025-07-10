@@ -22,7 +22,7 @@ func Setup_spring(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: springCrdGroup, Kind: "CloudApplicationLiveView"}: cloudapplicationliveview.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, springCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

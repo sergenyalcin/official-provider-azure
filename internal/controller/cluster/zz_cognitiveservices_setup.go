@@ -24,7 +24,7 @@ func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: cognitiveservicesCrdGroup, Kind: "Account"}:    account.Setup,
 		schema.GroupKind{Group: cognitiveservicesCrdGroup, Kind: "Deployment"}: deployment.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, cognitiveservicesCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

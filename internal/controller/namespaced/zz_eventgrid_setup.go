@@ -30,7 +30,7 @@ func Setup_eventgrid(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: eventgridCrdGroup, Kind: "SystemTopic"}:       systemtopic.Setup,
 		schema.GroupKind{Group: eventgridCrdGroup, Kind: "Topic"}:             topic.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, eventgridCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

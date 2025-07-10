@@ -22,7 +22,7 @@ func Setup_solutions(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: solutionsCrdGroup, Kind: "ManagedApplicationDefinition"}: managedapplicationdefinition.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, solutionsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

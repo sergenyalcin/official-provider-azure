@@ -22,7 +22,7 @@ func Setup_storagesync(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: storagesyncCrdGroup, Kind: "StorageSync"}: storagesync.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, storagesyncCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

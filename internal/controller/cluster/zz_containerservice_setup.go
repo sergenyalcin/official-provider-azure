@@ -28,7 +28,7 @@ func Setup_containerservice(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: containerserviceCrdGroup, Kind: "KubernetesClusterNodePool"}:  kubernetesclusternodepool.Setup,
 		schema.GroupKind{Group: containerserviceCrdGroup, Kind: "KubernetesFleetManager"}:     kubernetesfleetmanager.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, containerserviceCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

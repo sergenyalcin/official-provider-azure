@@ -68,7 +68,7 @@ func Setup_compute(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: computeCrdGroup, Kind: "WindowsVirtualMachine"}:              windowsvirtualmachine.Setup,
 		schema.GroupKind{Group: computeCrdGroup, Kind: "WindowsVirtualMachineScaleSet"}:      windowsvirtualmachinescaleset.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, computeCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

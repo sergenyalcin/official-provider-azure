@@ -24,7 +24,7 @@ func Setup_labservices(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: labservicesCrdGroup, Kind: "LabServiceLab"}:  labservicelab.Setup,
 		schema.GroupKind{Group: labservicesCrdGroup, Kind: "LabServicePlan"}: labserviceplan.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, labservicesCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

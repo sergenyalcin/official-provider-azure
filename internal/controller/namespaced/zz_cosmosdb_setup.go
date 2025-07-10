@@ -60,7 +60,7 @@ func Setup_cosmosdb(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: cosmosdbCrdGroup, Kind: "SQLTrigger"}:          sqltrigger.Setup,
 		schema.GroupKind{Group: cosmosdbCrdGroup, Kind: "Table"}:               table.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, cosmosdbCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

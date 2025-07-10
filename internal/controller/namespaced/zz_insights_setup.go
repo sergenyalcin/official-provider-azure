@@ -62,7 +62,7 @@ func Setup_insights(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: insightsCrdGroup, Kind: "MonitorScheduledQueryRulesAlertV2"}:     monitorscheduledqueryrulesalertv2.Setup,
 		schema.GroupKind{Group: insightsCrdGroup, Kind: "MonitorScheduledQueryRulesLog"}:         monitorscheduledqueryruleslog.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, insightsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

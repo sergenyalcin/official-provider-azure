@@ -28,7 +28,7 @@ func Setup_relay(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: relayCrdGroup, Kind: "HybridConnectionAuthorizationRule"}: hybridconnectionauthorizationrule.Setup,
 		schema.GroupKind{Group: relayCrdGroup, Kind: "NamespaceAuthorizationRule"}:        namespaceauthorizationrule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, relayCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

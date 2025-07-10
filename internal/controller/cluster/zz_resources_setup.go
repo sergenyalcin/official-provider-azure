@@ -28,7 +28,7 @@ func Setup_resources(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: resourcesCrdGroup, Kind: "ResourceGroupTemplateDeployment"}:         resourcegrouptemplatedeployment.Setup,
 		schema.GroupKind{Group: resourcesCrdGroup, Kind: "SubscriptionTemplateDeployment"}:          subscriptiontemplatedeployment.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, resourcesCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

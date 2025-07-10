@@ -30,7 +30,7 @@ func Setup_storagecache(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: storagecacheCrdGroup, Kind: "HPCCacheBlobTarget"}:    hpccacheblobtarget.Setup,
 		schema.GroupKind{Group: storagecacheCrdGroup, Kind: "HPCCacheNFSTarget"}:     hpccachenfstarget.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, storagecacheCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

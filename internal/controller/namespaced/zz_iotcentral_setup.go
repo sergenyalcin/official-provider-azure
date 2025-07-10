@@ -24,7 +24,7 @@ func Setup_iotcentral(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: iotcentralCrdGroup, Kind: "Application"}:               application.Setup,
 		schema.GroupKind{Group: iotcentralCrdGroup, Kind: "ApplicationNetworkRuleSet"}: applicationnetworkruleset.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, iotcentralCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

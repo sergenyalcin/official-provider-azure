@@ -26,7 +26,7 @@ func Setup_costmanagement(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: costmanagementCrdGroup, Kind: "ResourceGroupCostManagementExport"}: resourcegroupcostmanagementexport.Setup,
 		schema.GroupKind{Group: costmanagementCrdGroup, Kind: "SubscriptionCostManagementExport"}:  subscriptioncostmanagementexport.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, costmanagementCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

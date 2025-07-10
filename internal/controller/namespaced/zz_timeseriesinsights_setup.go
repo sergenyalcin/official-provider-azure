@@ -30,7 +30,7 @@ func Setup_timeseriesinsights(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: timeseriesinsightsCrdGroup, Kind: "ReferenceDataSet"}:    referencedataset.Setup,
 		schema.GroupKind{Group: timeseriesinsightsCrdGroup, Kind: "StandardEnvironment"}: standardenvironment.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, timeseriesinsightsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

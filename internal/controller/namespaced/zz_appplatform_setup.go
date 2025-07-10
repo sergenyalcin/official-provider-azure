@@ -64,7 +64,7 @@ func Setup_appplatform(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudService"}:                springcloudservice.Setup,
 		schema.GroupKind{Group: appplatformCrdGroup, Kind: "SpringCloudStorage"}:                springcloudstorage.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, appplatformCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

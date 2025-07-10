@@ -32,7 +32,7 @@ func Setup_signalrservice(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "WebPubsubHub"}:                     webpubsubhub.Setup,
 		schema.GroupKind{Group: signalrserviceCrdGroup, Kind: "WebPubsubNetworkACL"}:              webpubsubnetworkacl.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, signalrserviceCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

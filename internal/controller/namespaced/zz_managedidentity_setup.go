@@ -24,7 +24,7 @@ func Setup_managedidentity(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: managedidentityCrdGroup, Kind: "FederatedIdentityCredential"}: federatedidentitycredential.Setup,
 		schema.GroupKind{Group: managedidentityCrdGroup, Kind: "UserAssignedIdentity"}:        userassignedidentity.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, managedidentityCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

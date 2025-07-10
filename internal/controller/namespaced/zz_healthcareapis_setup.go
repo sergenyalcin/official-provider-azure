@@ -32,7 +32,7 @@ func Setup_healthcareapis(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: healthcareapisCrdGroup, Kind: "HealthcareService"}:                       healthcareservice.Setup,
 		schema.GroupKind{Group: healthcareapisCrdGroup, Kind: "HealthcareWorkspace"}:                     healthcareworkspace.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, healthcareapisCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

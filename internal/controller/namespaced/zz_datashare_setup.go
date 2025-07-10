@@ -32,7 +32,7 @@ func Setup_datashare(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: datashareCrdGroup, Kind: "DataSetKustoDatabase"}: datasetkustodatabase.Setup,
 		schema.GroupKind{Group: datashareCrdGroup, Kind: "DataShare"}:            datashare.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, datashareCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -22,7 +22,7 @@ func Setup_storagepool(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: storagepoolCrdGroup, Kind: "DiskPool"}: diskpool.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, storagepoolCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -58,7 +58,7 @@ func Setup_synapse(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: synapseCrdGroup, Kind: "WorkspaceSecurityAlertPolicy"}:     workspacesecurityalertpolicy.Setup,
 		schema.GroupKind{Group: synapseCrdGroup, Kind: "WorkspaceVulnerabilityAssessment"}: workspacevulnerabilityassessment.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, synapseCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

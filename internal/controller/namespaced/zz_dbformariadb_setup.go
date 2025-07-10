@@ -30,7 +30,7 @@ func Setup_dbformariadb(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: dbformariadbCrdGroup, Kind: "Server"}:             server.Setup,
 		schema.GroupKind{Group: dbformariadbCrdGroup, Kind: "VirtualNetworkRule"}: virtualnetworkrule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, dbformariadbCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

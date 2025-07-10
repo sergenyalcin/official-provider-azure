@@ -26,7 +26,7 @@ func Setup_notificationhubs(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: notificationhubsCrdGroup, Kind: "NotificationHub"}:          notificationhub.Setup,
 		schema.GroupKind{Group: notificationhubsCrdGroup, Kind: "NotificationHubNamespace"}: notificationhubnamespace.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, notificationhubsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

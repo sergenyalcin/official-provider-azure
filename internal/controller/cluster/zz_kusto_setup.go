@@ -38,7 +38,7 @@ func Setup_kusto(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: kustoCrdGroup, Kind: "EventHubDataConnection"}:        eventhubdataconnection.Setup,
 		schema.GroupKind{Group: kustoCrdGroup, Kind: "IOTHubDataConnection"}:          iothubdataconnection.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, kustoCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -56,7 +56,7 @@ func Setup_streamanalytics(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "StreamInputEventHub"}:    streaminputeventhub.Setup,
 		schema.GroupKind{Group: streamanalyticsCrdGroup, Kind: "StreamInputIOTHub"}:      streaminputiothub.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, streamanalyticsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

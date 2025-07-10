@@ -24,7 +24,7 @@ func Setup_maps(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: mapsCrdGroup, Kind: "Account"}: account.Setup,
 		schema.GroupKind{Group: mapsCrdGroup, Kind: "Creator"}: creator.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, mapsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -26,7 +26,7 @@ func Setup_azure(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: azureCrdGroup, Kind: "ResourceProviderRegistration"}: resourceproviderregistration.Setup,
 		schema.GroupKind{Group: azureCrdGroup, Kind: "Subscription"}:                 subscription.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, azureCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

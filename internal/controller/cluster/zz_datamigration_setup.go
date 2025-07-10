@@ -24,7 +24,7 @@ func Setup_datamigration(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: datamigrationCrdGroup, Kind: "DatabaseMigrationProject"}: databasemigrationproject.Setup,
 		schema.GroupKind{Group: datamigrationCrdGroup, Kind: "DatabaseMigrationService"}: databasemigrationservice.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, datamigrationCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -24,7 +24,7 @@ func Setup_deviceupdate(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: deviceupdateCrdGroup, Kind: "IOTHubDeviceUpdateAccount"}:  iothubdeviceupdateaccount.Setup,
 		schema.GroupKind{Group: deviceupdateCrdGroup, Kind: "IOTHubDeviceUpdateInstance"}: iothubdeviceupdateinstance.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, deviceupdateCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

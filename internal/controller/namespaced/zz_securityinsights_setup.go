@@ -34,7 +34,7 @@ func Setup_securityinsights(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelLogAnalyticsWorkspaceOnboarding"}:           sentinelloganalyticsworkspaceonboarding.Setup,
 		schema.GroupKind{Group: securityinsightsCrdGroup, Kind: "SentinelWatchlist"}:                                 sentinelwatchlist.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, securityinsightsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

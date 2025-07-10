@@ -22,7 +22,7 @@ func Setup_communication(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: communicationCrdGroup, Kind: "Service"}: service.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, communicationCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

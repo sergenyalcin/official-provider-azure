@@ -34,7 +34,7 @@ func Setup_cache(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: cacheCrdGroup, Kind: "RedisFirewallRule"}:                redisfirewallrule.Setup,
 		schema.GroupKind{Group: cacheCrdGroup, Kind: "RedisLinkedServer"}:                redislinkedserver.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, cacheCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

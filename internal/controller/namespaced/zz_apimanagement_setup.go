@@ -98,7 +98,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: apimanagementCrdGroup, Kind: "Tag"}:                        tag.Setup,
 		schema.GroupKind{Group: apimanagementCrdGroup, Kind: "User"}:                       user.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, apimanagementCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

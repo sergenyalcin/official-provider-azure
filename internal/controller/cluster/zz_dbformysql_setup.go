@@ -40,7 +40,7 @@ func Setup_dbformysql(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: dbformysqlCrdGroup, Kind: "Server"}:                       server.Setup,
 		schema.GroupKind{Group: dbformysqlCrdGroup, Kind: "VirtualNetworkRule"}:           virtualnetworkrule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, dbformysqlCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

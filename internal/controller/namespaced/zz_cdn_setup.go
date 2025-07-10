@@ -46,7 +46,7 @@ func Setup_cdn(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: cdnCrdGroup, Kind: "FrontdoorSecurityPolicy"}:          frontdoorsecuritypolicy.Setup,
 		schema.GroupKind{Group: cdnCrdGroup, Kind: "Profile"}:                          profile.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, cdnCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

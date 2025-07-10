@@ -28,7 +28,7 @@ func Setup_config(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: configCrdGroup, Kind: "ResourceProviderRegistration"}: resourceproviderregistration.Setup,
 		schema.GroupKind{Group: configCrdGroup, Kind: "Subscription"}:                 subscription.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, configCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

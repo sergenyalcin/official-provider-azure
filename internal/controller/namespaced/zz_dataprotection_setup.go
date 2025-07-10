@@ -40,7 +40,7 @@ func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "BackupVault"}:                     backupvault.Setup,
 		schema.GroupKind{Group: dataprotectionCrdGroup, Kind: "ResourceGuard"}:                   resourceguard.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, dataprotectionCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

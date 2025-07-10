@@ -110,7 +110,7 @@ func Setup_datafactory(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: datafactoryCrdGroup, Kind: "TriggerCustomEvent"}:               triggercustomevent.Setup,
 		schema.GroupKind{Group: datafactoryCrdGroup, Kind: "TriggerSchedule"}:                  triggerschedule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, datafactoryCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

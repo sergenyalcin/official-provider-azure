@@ -30,7 +30,7 @@ func Setup_alertsmanagement(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: alertsmanagementCrdGroup, Kind: "MonitorAlertProcessingRuleSuppression"}: monitoralertprocessingrulesuppression.Setup,
 		schema.GroupKind{Group: alertsmanagementCrdGroup, Kind: "MonitorSmartDetectorAlertRule"}:         monitorsmartdetectoralertrule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, alertsmanagementCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

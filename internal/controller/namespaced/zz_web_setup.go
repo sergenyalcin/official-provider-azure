@@ -58,7 +58,7 @@ func Setup_web(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: webCrdGroup, Kind: "WindowsWebApp"}:               windowswebapp.Setup,
 		schema.GroupKind{Group: webCrdGroup, Kind: "WindowsWebAppSlot"}:           windowswebappslot.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, webCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

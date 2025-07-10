@@ -22,7 +22,7 @@ func Setup_powerbidedicated(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: powerbidedicatedCrdGroup, Kind: "PowerBIEmbedded"}: powerbiembedded.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, powerbidedicatedCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

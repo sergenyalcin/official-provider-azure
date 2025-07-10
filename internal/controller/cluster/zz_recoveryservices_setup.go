@@ -44,7 +44,7 @@ func Setup_recoveryservices(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "SiteRecoveryReplicationPolicy"}:          siterecoveryreplicationpolicy.Setup,
 		schema.GroupKind{Group: recoveryservicesCrdGroup, Kind: "Vault"}:                                  vault.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, recoveryservicesCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

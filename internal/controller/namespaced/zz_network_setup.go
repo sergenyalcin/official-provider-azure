@@ -246,7 +246,7 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: networkCrdGroup, Kind: "WatcherFlowLog"}:                                      watcherflowlog.Setup,
 		schema.GroupKind{Group: networkCrdGroup, Kind: "WebApplicationFirewallPolicy"}:                        webapplicationfirewallpolicy.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, networkCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

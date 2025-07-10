@@ -40,7 +40,7 @@ func Setup_botservice(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: botserviceCrdGroup, Kind: "BotConnection"}:           botconnection.Setup,
 		schema.GroupKind{Group: botserviceCrdGroup, Kind: "BotWebApp"}:               botwebapp.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, botserviceCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

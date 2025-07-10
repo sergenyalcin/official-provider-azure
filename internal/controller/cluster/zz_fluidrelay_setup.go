@@ -22,7 +22,7 @@ func Setup_fluidrelay(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: fluidrelayCrdGroup, Kind: "Server"}: server.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, fluidrelayCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

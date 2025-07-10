@@ -11,7 +11,7 @@ toolchain go1.24.5
 replace (
 	github.com/crossplane/crossplane-runtime => github.com/erhancagirici/crossplane-runtime v0.0.0-20250709142654-998b18a399d2
 	github.com/crossplane/crossplane-tools => github.com/erhancagirici/crossplane-tools v0.0.0-20250708081606-c62c0d527ca1
-	github.com/crossplane/upjet => github.com/sergenyalcin/upjet v0.0.0-20250709163443-33e30ba731b7
+	github.com/crossplane/upjet => github.com/sergenyalcin/upjet v0.0.0-20250710131134-bd3503c15a9a
 )
 
 require (
@@ -26,6 +26,7 @@ require (
 	github.com/hashicorp/terraform-provider-azurerm v1.44.1-0.20230519070112-155958d2cb08
 	github.com/pkg/errors v0.9.1
 	k8s.io/api v0.32.3
+	k8s.io/apiextensions-apiserver v0.32.3
 	k8s.io/apimachinery v0.32.3
 	k8s.io/client-go v0.32.3
 	sigs.k8s.io/controller-runtime v0.19.0
@@ -166,7 +167,6 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.32.3 // indirect
 	k8s.io/component-base v0.32.3 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20241105132330-32ad38e42d3f // indirect

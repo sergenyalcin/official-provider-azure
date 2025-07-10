@@ -34,7 +34,7 @@ func Setup_devtestlab(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "VirtualNetwork"}:           virtualnetwork.Setup,
 		schema.GroupKind{Group: devtestlabCrdGroup, Kind: "WindowsVirtualMachine"}:    windowsvirtualmachine.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, devtestlabCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

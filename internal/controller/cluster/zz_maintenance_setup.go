@@ -26,7 +26,7 @@ func Setup_maintenance(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: maintenanceCrdGroup, Kind: "MaintenanceAssignmentVirtualMachine"}: maintenanceassignmentvirtualmachine.Setup,
 		schema.GroupKind{Group: maintenanceCrdGroup, Kind: "MaintenanceConfiguration"}:            maintenanceconfiguration.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, maintenanceCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

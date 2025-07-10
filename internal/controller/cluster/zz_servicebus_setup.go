@@ -40,7 +40,7 @@ func Setup_servicebus(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: servicebusCrdGroup, Kind: "Topic"}:                           topic.Setup,
 		schema.GroupKind{Group: servicebusCrdGroup, Kind: "TopicAuthorizationRule"}:          topicauthorizationrule.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, servicebusCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -28,7 +28,7 @@ func Setup_databricks(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: databricksCrdGroup, Kind: "WorkspaceCustomerManagedKey"}:         workspacecustomermanagedkey.Setup,
 		schema.GroupKind{Group: databricksCrdGroup, Kind: "WorkspaceRootDbfsCustomerManagedKey"}: workspacerootdbfscustomermanagedkey.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, databricksCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

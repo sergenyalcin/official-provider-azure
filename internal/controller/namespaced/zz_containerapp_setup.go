@@ -34,7 +34,7 @@ func Setup_containerapp(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: containerappCrdGroup, Kind: "EnvironmentDaprComponent"}: environmentdaprcomponent.Setup,
 		schema.GroupKind{Group: containerappCrdGroup, Kind: "EnvironmentStorage"}:       environmentstorage.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, containerappCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

@@ -22,7 +22,7 @@ func Setup_operationsmanagement(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: operationsmanagementCrdGroup, Kind: "LogAnalyticsSolution"}: loganalyticssolution.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, operationsmanagementCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

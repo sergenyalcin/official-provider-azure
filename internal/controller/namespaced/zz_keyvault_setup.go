@@ -40,7 +40,7 @@ func Setup_keyvault(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "Secret"}:                                  secret.Setup,
 		schema.GroupKind{Group: keyvaultCrdGroup, Kind: "Vault"}:                                   vault.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, keyvaultCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

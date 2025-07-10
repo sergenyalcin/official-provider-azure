@@ -54,7 +54,7 @@ func Setup_storage(mgr ctrl.Manager, o controller.Options) error {
 		schema.GroupKind{Group: storageCrdGroup, Kind: "Table"}:                       table.Setup,
 		schema.GroupKind{Group: storageCrdGroup, Kind: "TableEntity"}:                 tableentity.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, storageCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

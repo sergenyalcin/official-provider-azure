@@ -22,7 +22,7 @@ func Setup_digitaltwins(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: digitaltwinsCrdGroup, Kind: "Instance"}: instance.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, digitaltwinsCrdGroup, o); err != nil {
 		return err
 	}
 	return nil

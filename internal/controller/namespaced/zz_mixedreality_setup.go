@@ -22,7 +22,7 @@ func Setup_mixedreality(mgr ctrl.Manager, o controller.Options) error {
 	crdToSetupFn := map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
 		schema.GroupKind{Group: mixedrealityCrdGroup, Kind: "SpatialAnchorsAccount"}: spatialanchorsaccount.Setup,
 	}
-	if err := dynamiccrd.Setup(mgr, crdToSetupFn, o); err != nil {
+	if err := dynamiccrd.Setup(mgr, crdToSetupFn, mixedrealityCrdGroup, o); err != nil {
 		return err
 	}
 	return nil
